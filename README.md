@@ -21,13 +21,26 @@ cp .env.example .env
 # .env に MATHPIX_APP_ID と MATHPIX_APP_KEY を記入
 ```
 
-## 起動
+## 起動 (Web UI)
 
 ```bash
 python server.py
 ```
 
 ブラウザで <http://127.0.0.1:8000> を開き、PDFをドロップしてください。
+
+## CLI (バッチ処理向け)
+
+```bash
+# 1ファイルを tex.zip (図版入りLaTeX) に変換
+python cli.py paper.pdf
+
+# フォーマット指定 + 出力ディレクトリ指定
+python cli.py paper.pdf --fmt docx -o ./out
+
+# まとめて処理
+python cli.py *.pdf --fmt md
+```
 
 ## 動作の流れ
 
@@ -51,7 +64,8 @@ python server.py
 ```
 .
 ├── server.py            # FastAPI エントリポイント
-├── mathpix_client.py    # Mathpix API ラッパー
+├── cli.py               # コマンドラインインターフェース
+├── mathpix_client.py    # Mathpix API ラッパー (serverとcliで共有)
 ├── templates/
 │   └── index.html       # ドラッグ&ドロップUI
 ├── requirements.txt
