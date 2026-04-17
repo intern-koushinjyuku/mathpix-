@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>PDF → Mathpix → ZIP</title>
+  <style>
+    :root { --fg:#222; --bg:#fafafa; --border:#ccc; --accent:#2d6cdf; }
+    * { box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+           color: var(--fg); background: var(--bg); margin: 0; padding: 2rem; }
+    main { max-width: 640px; margin: 0 auto; }
+    h1 { font-size: 1.4rem; margin-top: 0; }
+    #drop {
+      border: 2px dashed var(--border); border-radius: 12px;
+      padding: 3rem 1rem; text-align: center; background: #fff;
+      transition: border-color .15s, background .15s; cursor: pointer;
+    }
+    #drop.hover { border-color: var(--accent); background: #eef3fc; }
+    #drop input { display: none; }
+    label.fmt { display: inline-flex; gap: .3rem; align-items: center;
+                margin-right: 1rem; font-size: .9rem; }
+    .row { margin: 1rem 0; }
+    progress { width: 100%; height: 14px; }
+    .log { font-family: ui-monospace, Menlo, monospace; font-size: .85rem;
+           background: #fff; border: 1px solid var(--border); border-radius: 6px;
+           padding: .75rem; margin-top: 1rem; min-height: 3em;
+           white-space: pre-wrap; word-break: break-all; }
+    button, a.btn {
+      display: inline-block; background: var(--accent); color: #fff;
+      padding: .6rem 1.2rem; border: 0; border-radius: 6px;
+      text-decoration: none; font-size: 1rem; cursor: pointer;
+    }
+    button:disabled { background: #999; cursor: not-allowed; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>PDF → Mathpix → ZIP</h1>
+  <p>PDFをドラッグ&ドロップするか、クリックして選択してください。</p>
+
+  <div class="row">
+    <strong>出力フォーマット:</strong><br />
+    <label class="fmt"><input type="radio" name="fmt" value="tex.zip" checked />LaTeX (図版入りZIP)</label>
+    <label class="fmt"><input type="radio" name="fmt" value="docx" />DOCX</label>
+    <label class="fmt"><input type="radio" name="fmt" value="md" />Markdown</label>
+    <label class="fmt"><input type="radio" name="fmt" value="html" />HTML</label>
+  </div>
+
+  <div id="drop">
+    <div id="drop-label">ここにPDFをドロップ、またはクリックして選択</div>
+    <input id="file" type="file" accept="application/pdf" />
+  </div>
+
+  <div class="row" id="progress-row" hidden>
+    <progress id="bar" value="0" max="100"></progress>
+    <div id="percent">0%</div>
+  </div>
+
+  <div class="log" id="log"></div>
+
+  <div class="row" id="download-row" hidden>
+    <a id="download" class="btn" href="#">ZIPをダウンロード</a>
+  </div>
+</main>
+
+<script>
+const drop = document.getElementById("drop");
+const fileInput = document.getElementById("file");
+const log = document.getElementById("log");
+const bar = document.getElementById("bar");
+const percentEl = document.getElementById("percent");
+const progressRow = document.getElementById("progress-row");
+const downloadRow = document.getElementById("download-row");
+const downloadLink = document.getElementById("download");
+
+function appendLog(msg) {
+  const ts = new Date().toLocaleTimeString();
+  log.textContent += `[${ts}] ${msg}\n`;
+  log.scrollTop = log.scrollHeight;
+}
+
+function selectedFormat() {
+  return document.querySelector('input[name="fmt"]:checked').value;
+}
+
+drop.addEventListener("click", () => fileInput.click());
+["dragenter", "dragover"].forEach(ev =>
+  drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add("hover"); }));
+["dragleave", "drop"].forEach(ev =>
+  drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove("hover"); }));
+
+drop.addEventListener("drop", e => {
+  const f = e.dataTransfer.files[0];
+  if (f) handleFile(f);
+});
+fileInput.addEventListener("change", e => {
+  const f = e.target.files[0];
+  if (f) handleFile(f);
+});
+
+async function handleFile(file) {
+  if (!file.name.toLowerCase().endsWith(".pdf")) {
+    appendLog("PDFファイルを選択してください。");
+    return;
+  }
+  downloadRow.hidden = true;
+  progressRow.hidden = false;
+  bar.value = 0; percentEl.textContent = "アップロード中...";
+  log.textContent = "";
+  appendLog(`"${file.name}" をMathpixにアップロード中...`);
+
+  const fd = new FormData();
+  fd.append("file", file);
+  let pdfId;
+  try {
+    const r = await fetch("/upload", { method: "POST", body: fd });
+    if (!r.ok) throw new Error(await r.text());
+    pdfId = (await r.json()).pdf_id;
+    appendLog(`pdf_id: ${pdfId}`);
+  } catch (e) {
+    appendLog("アップロード失敗: " + e.message);
+    progressRow.hidden = true;
+    return;
+  }
+
+  await pollStatus(pdfId);
+}
+
+async function pollStatus(pdfId) {
+  while (true) {
+    await new Promise(r => setTimeout(r, 2000));
+    let s;
+    try {
+      const r = await fetch(`/status/${pdfId}`);
+      if (!r.ok) throw new Error(await r.text());
+      s = await r.json();
+    } catch (e) {
+      appendLog("ステータス取得失敗: " + e.message);
+      return;
+    }
+    const pct = s.percent_done ?? 0;
+    bar.value = pct;
+    percentEl.textContent = `${pct}% (${s.status})`;
+    if (s.status === "completed") {
+      appendLog("変換完了。");
+      const fmt = selectedFormat();
+      downloadLink.href = `/download/${pdfId}?fmt=${encodeURIComponent(fmt)}`;
+      downloadRow.hidden = false;
+      return;
+    }
+    if (s.status === "error") {
+      appendLog("Mathpix側でエラーが発生しました。");
+      return;
+    }
+  }
+}
+</script>
+</body>
+</html>
