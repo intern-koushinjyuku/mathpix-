@@ -2,53 +2,85 @@
 
 PDFをブラウザにドラッグ&ドロップすると、Mathpix PDF API にアップロードして
 変換が終わり次第、図版入りのZIP (LaTeX) やDOCX/Markdown/HTMLとしてダウンロードできる
-ローカルWeb UIです。
+Web UI / CLI / Celeryワーカー構成です。
 
 ## 必要なもの
 
-- Python 3.10 以上
+- Python 3.10 以上 (またはDocker)
 - Mathpix の `app_id` / `app_key`
   ([Mathpix Console](https://accounts.mathpix.com/) で取得)
+- (任意) Redis — 複数ユーザ同時処理やバックグラウンド実行をする場合
 
-## セットアップ
+## クイックスタート
+
+### A. Docker Compose (推奨: Web + Worker + Redis 一括起動)
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
+cp .env.example .env
+# .env に MATHPIX_APP_ID と MATHPIX_APP_KEY を記入
+
+docker compose up --build
+```
+
+<http://localhost:8000> を開いてPDFをドロップ。
+
+### B. ローカル Python (Redis不要・eagerモード)
+
+```bash
+python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 
 cp .env.example .env
-# .env に MATHPIX_APP_ID と MATHPIX_APP_KEY を記入
-```
+# .env で CELERY_TASK_ALWAYS_EAGER=1 の行を有効化
 
-## 起動 (Web UI)
-
-```bash
 python server.py
 ```
 
-ブラウザで <http://127.0.0.1:8000> を開き、PDFをドロップしてください。
+Redis なしでタスクが同一プロセスで実行されます (同時ユーザには不向き)。
 
-## CLI (バッチ処理向け)
+### C. ローカル Python + Redis + Worker
 
 ```bash
-# 1ファイルを tex.zip (図版入りLaTeX) に変換
-python cli.py paper.pdf
+redis-server &   # 別ターミナルで
+celery -A celery_app.celery_app worker --loglevel=info &
+python server.py
+```
 
-# フォーマット指定 + 出力ディレクトリ指定
+## CLI (バッチ処理・Celery不要)
+
+```bash
+python cli.py paper.pdf                  # → outputs/paper.tex.zip
 python cli.py paper.pdf --fmt docx -o ./out
-
-# まとめて処理
 python cli.py *.pdf --fmt md
 ```
 
-## 動作の流れ
+## テスト
 
-1. ブラウザがPDFを `POST /upload` に送信
-2. サーバーが Mathpix PDF API (`POST /v3/pdf`) にアップロードし `pdf_id` を返す
-3. ブラウザが `GET /status/{pdf_id}` を2秒間隔でポーリング
-4. `status=completed` になったら、選択したフォーマットで `GET /download/{pdf_id}` を呼ぶ
-5. サーバーが Mathpix から `/v3/pdf/{id}.<fmt>` を取得してブラウザに返す
+```bash
+pip install -r requirements-dev.txt
+pytest
+```
+
+Mathpix API は全て `unittest.mock` でモックしているので、ネットワークや
+キーなしで実行できます。
+
+## 動作の流れ (Web UI)
+
+1. ブラウザが PDF + 変換オプションを `POST /upload` に送信
+2. サーバーが Celery タスクを enqueue し、`task_id` を返す
+3. ワーカーが Mathpix PDF API にアップロードし、`completed` になるまでポーリング
+4. ブラウザが `GET /status/{task_id}` でワーカーの進捗を取得 (2秒間隔)
+5. `state=SUCCESS` になったら、選択したフォーマットで `GET /download/{task_id}`
+6. サーバーが Mathpix から `/v3/pdf/{pdf_id}.<fmt>` を取得して返す
+
+## 変換オプション (UI から変更可能)
+
+| オプション | デフォルト | 説明 |
+| --- | --- | --- |
+| 数式インライン区切り | `$...$` | `\(...\)` も選択可 |
+| `rm_spaces` | on | 余分な空白を正規化 |
+| `numbers_default_to_math` | off | 数字を常に数式として扱う |
+| `include_line_data` | off | 行単位メタデータを含める |
 
 ## 出力フォーマット
 
@@ -58,6 +90,7 @@ python cli.py *.pdf --fmt md
 | `docx` | Microsoft Word |
 | `md` | GitHub-flavored Markdown (画像はBase64埋め込み) |
 | `html` | 単一HTML |
+| `mmd` | Mathpix Markdown |
 
 ## ファイル構成
 
@@ -65,10 +98,17 @@ python cli.py *.pdf --fmt md
 .
 ├── server.py            # FastAPI エントリポイント
 ├── cli.py               # コマンドラインインターフェース
-├── mathpix_client.py    # Mathpix API ラッパー (serverとcliで共有)
+├── celery_app.py        # Celery インスタンス (broker/backend 設定)
+├── tasks.py             # Celery タスク (upload → poll → return pdf_id)
+├── mathpix_client.py    # Mathpix API ラッパー (全エントリポイントで共有)
 ├── templates/
 │   └── index.html       # ドラッグ&ドロップUI
+├── tests/
+│   └── test_mathpix_client.py
+├── Dockerfile
+├── docker-compose.yml   # web + worker + redis
 ├── requirements.txt
+├── requirements-dev.txt
 ├── .env.example
 └── outputs/             # ダウンロードしたZIPのキャッシュ (gitignore)
 ```
@@ -76,5 +116,7 @@ python cli.py *.pdf --fmt md
 ## 注意
 
 - `.env` はリポジトリにコミットされません。
-- `outputs/` に元ファイル名でZIPが保存されます (再ダウンロード用キャッシュ)。
-- 複数ユーザで同時利用する場合はジョブ管理 (Redis + Celery 等) を追加してください。
+- `outputs/` は web / worker コンテナ間で共有する必要があるため、
+  compose 設定で bind mount されています。
+- 本番運用時は Mathpix キーを Secrets Manager 等で管理し、
+  `outputs/` の定期クリーンアップを追加してください。

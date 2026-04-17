@@ -46,6 +46,21 @@
     <label class="fmt"><input type="radio" name="fmt" value="html" />HTML</label>
   </div>
 
+  <details class="row">
+    <summary><strong>変換オプション</strong></summary>
+    <div style="padding: .5rem 0;">
+      <label class="fmt">数式のインライン区切り:
+        <select id="opt-math-inline">
+          <option value="$" selected>$...$</option>
+          <option value="paren">\(...\)</option>
+        </select>
+      </label><br />
+      <label class="fmt"><input type="checkbox" id="opt-rm-spaces" checked />rm_spaces (空白の正規化)</label><br />
+      <label class="fmt"><input type="checkbox" id="opt-nums-math" />numbers_default_to_math</label><br />
+      <label class="fmt"><input type="checkbox" id="opt-line-data" />include_line_data</label>
+    </div>
+  </details>
+
   <div id="drop">
     <div id="drop-label">ここにPDFをドロップ、またはクリックして選択</div>
     <input id="file" type="file" accept="application/pdf" />
@@ -111,45 +126,49 @@ async function handleFile(file) {
 
   const fd = new FormData();
   fd.append("file", file);
-  let pdfId;
+  fd.append("math_inline", document.getElementById("opt-math-inline").value);
+  fd.append("rm_spaces", document.getElementById("opt-rm-spaces").checked);
+  fd.append("numbers_default_to_math", document.getElementById("opt-nums-math").checked);
+  fd.append("include_line_data", document.getElementById("opt-line-data").checked);
+  let taskId;
   try {
     const r = await fetch("/upload", { method: "POST", body: fd });
     if (!r.ok) throw new Error(await r.text());
-    pdfId = (await r.json()).pdf_id;
-    appendLog(`pdf_id: ${pdfId}`);
+    taskId = (await r.json()).task_id;
+    appendLog(`task_id: ${taskId}`);
   } catch (e) {
     appendLog("アップロード失敗: " + e.message);
     progressRow.hidden = true;
     return;
   }
 
-  await pollStatus(pdfId);
+  await pollStatus(taskId);
 }
 
-async function pollStatus(pdfId) {
+async function pollStatus(taskId) {
   while (true) {
     await new Promise(r => setTimeout(r, 2000));
     let s;
     try {
-      const r = await fetch(`/status/${pdfId}`);
+      const r = await fetch(`/status/${taskId}`);
       if (!r.ok) throw new Error(await r.text());
       s = await r.json();
     } catch (e) {
       appendLog("ステータス取得失敗: " + e.message);
       return;
     }
-    const pct = s.percent_done ?? 0;
+    const pct = s.percent ?? 0;
     bar.value = pct;
-    percentEl.textContent = `${pct}% (${s.status})`;
-    if (s.status === "completed") {
+    percentEl.textContent = `${pct}% (${s.stage ?? s.state})`;
+    if (s.state === "SUCCESS") {
       appendLog("変換完了。");
       const fmt = selectedFormat();
-      downloadLink.href = `/download/${pdfId}?fmt=${encodeURIComponent(fmt)}`;
+      downloadLink.href = `/download/${taskId}?fmt=${encodeURIComponent(fmt)}`;
       downloadRow.hidden = false;
       return;
     }
-    if (s.status === "error") {
-      appendLog("Mathpix側でエラーが発生しました。");
+    if (s.state === "FAILURE") {
+      appendLog("エラー: " + (s.error ?? "unknown"));
       return;
     }
   }

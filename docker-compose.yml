@@ -1,0 +1,39 @@
+services:
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  web:
+    build: .
+    depends_on:
+      redis:
+        condition: service_healthy
+    environment:
+      REDIS_URL: redis://redis:6379/0
+      MATHPIX_APP_ID: ${MATHPIX_APP_ID}
+      MATHPIX_APP_KEY: ${MATHPIX_APP_KEY}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./outputs:/app/outputs
+      - ./uploads:/app/uploads
+    command: uvicorn server:app --host 0.0.0.0 --port 8000
+
+  worker:
+    build: .
+    depends_on:
+      redis:
+        condition: service_healthy
+    environment:
+      REDIS_URL: redis://redis:6379/0
+      MATHPIX_APP_ID: ${MATHPIX_APP_ID}
+      MATHPIX_APP_KEY: ${MATHPIX_APP_KEY}
+    volumes:
+      - ./outputs:/app/outputs
+      - ./uploads:/app/uploads
+    command: celery -A celery_app.celery_app worker --loglevel=info --concurrency=2
