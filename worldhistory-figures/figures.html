@@ -1,0 +1,353 @@
+<title>世界史 図版リメイク（帝国主義とアジアの民族運動）</title>
+<style>
+  :root{
+    --ink:#1a1a1a; --sub:#555; --line:#8a7a5c; --paper:#fffdf7; --panel:#fff;
+    --uk:#c94c4c; --fr:#3a6fb0; --de:#4a8c5f; --it:#d9a53b; --pt:#8e6bb0;
+    --be:#a8763e; --es:#d97b3a; --jp:#c0567f; --ru:#6b8fa8; --free:#9a9a9a;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{--ink:#eee;--sub:#bbb;--paper:#1b1a17;--panel:#232220;--line:#a8956f}
+  }
+  :root[data-theme="dark"]{--ink:#eee;--sub:#bbb;--paper:#1b1a17;--panel:#232220;--line:#a8956f}
+  :root[data-theme="light"]{--ink:#1a1a1a;--sub:#555;--paper:#fffdf7;--panel:#fff;--line:#8a7a5c}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Hiragino Mincho ProN","Yu Mincho",serif;line-height:1.75}
+  .wrap{max-width:940px;margin:0 auto;padding:40px 20px 80px}
+  h1{font-size:1.5rem;border-bottom:2px solid var(--line);padding-bottom:.4em}
+  h2{font-size:1.15rem;margin-top:2.6em;border-left:6px solid var(--line);padding-left:.6em}
+  h3{font-size:1rem;margin-top:1.8em;color:var(--sub)}
+  figure{margin:1.4em 0;background:var(--panel);border:1px solid var(--line);
+    border-radius:4px;padding:18px;overflow-x:auto}
+  figcaption{font-size:.85rem;color:var(--sub);margin-top:.8em}
+  svg{display:block;max-width:100%;height:auto;margin:0 auto}
+  .legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;margin-top:12px}
+  .legend span{display:flex;align-items:center;gap:6px}
+  .sw{width:16px;height:11px;border:1px solid #0003;display:inline-block}
+  pre{background:var(--panel);border:1px solid var(--line);border-radius:4px;
+    padding:16px;overflow-x:auto;font-family:ui-monospace,monospace;
+    font-size:.8rem;line-height:1.6;white-space:pre-wrap}
+  table{border-collapse:collapse;width:100%;font-size:.85rem}
+  th,td{border:1px solid var(--line);padding:6px 8px;text-align:left}
+  th{background:color-mix(in srgb,var(--line) 18%,transparent)}
+  .note{font-size:.85rem;color:var(--sub);border-left:3px solid var(--line);padding-left:.8em}
+</style>
+
+<div class="wrap">
+<h1>世界史 図版リメイク — 帝国主義とアジアの民族運動</h1>
+<p class="note">元PDFの資料B・C・Dを、山川出版社『詳説世界史』の図版作法（勢力＝色分け／年代＝縦軸／因果＝矢印、注記は最小限）に合わせて描き直したものです。地図はいずれも学習用の模式図で、国境線は概略です。</p>
+
+<h2>資料B　アフリカの分割（1880年代〜1914年）</h2>
+<figure>
+<svg viewBox="0 0 700 470" role="img" aria-label="1914年ごろのアフリカ分割地図">
+  <defs>
+    <clipPath id="afr">
+      <path d="M70,24 L150,18 L200,48 L250,54 L270,66 L285,126 L315,168 L355,168
+               L325,228 L300,264 L295,282 L300,330 L265,396 L255,420 L190,444
+               L170,378 L165,294 L160,276 L145,240 L145,216 L130,216 L100,210
+               L80,210 L35,192 L15,150 L15,114 L50,60 Z"/>
+    </clipPath>
+    <marker id="ar" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="var(--ink)"/>
+    </marker>
+  </defs>
+
+  <g clip-path="url(#afr)">
+    <rect x="0" y="0" width="400" height="470" fill="#fff" fill-opacity=".01"/>
+    <!-- フランス -->
+    <g fill="var(--fr)" fill-opacity=".55">
+      <polygon points="10,30 205,35 205,120 150,205 60,220 0,205 0,55"/>
+      <polygon points="140,200 210,200 215,265 145,262"/>
+    </g>
+    <!-- イギリス -->
+    <g fill="var(--uk)" fill-opacity=".55">
+      <polygon points="238,35 285,45 292,110 250,110"/>   <!-- エジプト -->
+      <polygon points="250,105 305,120 308,185 252,180"/> <!-- スーダン -->
+      <polygon points="288,215 330,215 330,285 288,285"/> <!-- 東アフリカ -->
+      <polygon points="225,300 292,300 292,370 225,370"/> <!-- ローデシア -->
+      <polygon points="175,368 275,368 275,460 175,460"/> <!-- 南アフリカ -->
+      <polygon points="105,185 142,185 142,235 105,235"/> <!-- ナイジェリア -->
+      <polygon points="92,190 106,190 106,215 92,215"/>
+    </g>
+    <!-- ドイツ -->
+    <g fill="var(--de)" fill-opacity=".55">
+      <polygon points="272,265 302,265 302,332 272,332"/> <!-- 東アフリカ -->
+      <polygon points="163,328 205,328 205,402 163,402"/> <!-- 南西アフリカ -->
+      <polygon points="140,208 166,208 166,252 140,252"/> <!-- カメルーン -->
+    </g>
+    <!-- イタリア -->
+    <g fill="var(--it)" fill-opacity=".6">
+      <polygon points="178,35 238,38 238,122 180,120"/>   <!-- リビア -->
+      <polygon points="298,148 332,150 332,172 298,170"/> <!-- エリトリア -->
+      <polygon points="320,190 360,190 360,240 320,240"/> <!-- ソマリランド -->
+    </g>
+    <!-- ポルトガル -->
+    <g fill="var(--pt)" fill-opacity=".55">
+      <polygon points="158,296 216,296 216,356 158,356"/> <!-- アンゴラ -->
+      <polygon points="284,298 314,298 314,372 284,372"/> <!-- モザンビーク -->
+    </g>
+    <!-- ベルギー -->
+    <polygon points="176,248 268,248 268,300 176,300" fill="var(--be)" fill-opacity=".55"/>
+    <!-- スペイン -->
+    <polygon points="0,60 52,58 52,100 0,100" fill="var(--es)" fill-opacity=".55"/>
+    <!-- 独立国 -->
+    <g fill="var(--free)" fill-opacity=".5">
+      <polygon points="292,168 330,168 330,214 292,214"/> <!-- エチオピア -->
+      <polygon points="48,192 78,192 78,216 48,216"/>     <!-- リベリア -->
+    </g>
+  </g>
+
+  <path d="M70,24 L150,18 L200,48 L250,54 L270,66 L285,126 L315,168 L355,168
+           L325,228 L300,264 L295,282 L300,330 L265,396 L255,420 L190,444
+           L170,378 L165,294 L160,276 L145,240 L145,216 L130,216 L100,210
+           L80,210 L35,192 L15,150 L15,114 L50,60 Z"
+        fill="none" stroke="var(--ink)" stroke-width="1.6"/>
+
+  <g font-size="11" fill="var(--ink)" font-family="sans-serif">
+    <text x="60" y="120">仏領西アフリカ</text>
+    <text x="196" y="88">伊：リビア</text>
+    <text x="256" y="82">英：エジプト</text>
+    <text x="258" y="150">英：スーダン</text>
+    <text x="296" y="196">エチオピア</text>
+    <text x="30" y="208">リベリア</text>
+    <text x="186" y="278">ベルギー領コンゴ</text>
+    <text x="172" y="330">ポ：アンゴラ</text>
+    <text x="276" y="300">独：東アフリカ</text>
+    <text x="163" y="372">独：南西アフリカ</text>
+    <text x="196" y="412">英：南アフリカ連邦</text>
+  </g>
+
+  <!-- 縦断・横断政策 -->
+  <g stroke-width="2.2" fill="none" marker-end="url(#ar)">
+    <path d="M266,62 C300,160 290,300 232,428" stroke="var(--uk)" stroke-dasharray="7 5"/>
+    <path d="M40,150 C130,175 230,168 316,172" stroke="var(--fr)" stroke-dasharray="7 5"/>
+  </g>
+  <circle cx="272" cy="160" r="5.5" fill="none" stroke="var(--ink)" stroke-width="2"/>
+  <text x="282" y="140" font-size="11" font-family="sans-serif">ファショダ事件(1898)</text>
+
+  <!-- 右側注記 -->
+  <g font-family="sans-serif" font-size="12" fill="var(--ink)">
+    <line x1="392" y1="30" x2="392" y2="440" stroke="var(--line)"/>
+    <text x="408" y="44" font-size="13" font-weight="bold">分割を促した要因</text>
+    <text x="408" y="68">・ベルリン会議（1884〜85）</text>
+    <text x="408" y="88">　＝先占の原則・実効支配の原則</text>
+    <text x="408" y="112">・第2次産業革命と資本輸出</text>
+    <text x="408" y="132">・原料供給地と市場の確保</text>
+
+    <text x="408" y="170" font-size="13" font-weight="bold">縦断政策と横断政策</text>
+    <text x="408" y="194"><tspan fill="var(--uk)">━ 英</tspan>：カイロ―ケープタウン―カルカッタ</text>
+    <text x="408" y="214">　（3C政策・縦断政策）</text>
+    <text x="408" y="238"><tspan fill="var(--fr)">━ 仏</tspan>：サハラ―ジブチ（横断政策）</text>
+    <text x="408" y="262">→ 交差点で<tspan font-weight="bold">ファショダ事件（1898）</tspan></text>
+    <text x="408" y="282">　仏の譲歩 → 英仏協商（1904）へ</text>
+
+    <text x="408" y="320" font-size="13" font-weight="bold">独立を保った2国</text>
+    <text x="408" y="344">・エチオピア帝国</text>
+    <text x="408" y="364">　アドワの戦い（1896）で伊を撃退</text>
+    <text x="408" y="388">・リベリア共和国</text>
+    <text x="408" y="408">　解放奴隷が建国、米の影響下</text>
+  </g>
+</svg>
+<div class="legend">
+  <span><i class="sw" style="background:var(--uk);opacity:.6"></i>イギリス</span>
+  <span><i class="sw" style="background:var(--fr);opacity:.6"></i>フランス</span>
+  <span><i class="sw" style="background:var(--de);opacity:.6"></i>ドイツ</span>
+  <span><i class="sw" style="background:var(--it);opacity:.6"></i>イタリア</span>
+  <span><i class="sw" style="background:var(--pt);opacity:.6"></i>ポルトガル</span>
+  <span><i class="sw" style="background:var(--be);opacity:.6"></i>ベルギー</span>
+  <span><i class="sw" style="background:var(--es);opacity:.6"></i>スペイン</span>
+  <span><i class="sw" style="background:var(--free);opacity:.6"></i>独立国</span>
+</div>
+<figcaption>資料B　1914年ごろのアフリカ分割（模式図）。設問「アフリカ分割を促した要因」「分割を免れた2国」に、地図上の情報だけで答えられる構成にした。</figcaption>
+</figure>
+
+<h3>元の図との違い</h3>
+<table>
+<tr><th>観点</th><th>元の図</th><th>リメイク後</th></tr>
+<tr><td>形式</td><td>「北部（仏・英）」等の文字ブロック4個</td><td>大陸輪郭＋列強別の色分け</td></tr>
+<tr><td>設問との対応</td><td>ベルリン会議・ファショダが本文注記のみ</td><td>縦断／横断政策を矢印で図示し交点にファショダ</td></tr>
+<tr><td>独立2国</td><td>文字列挙</td><td>地図上に位置と撃退の事実を明示</td></tr>
+</table>
+
+<h2>資料C　列強の中国分割と民族運動（1898〜1919）</h2>
+<figure>
+<svg viewBox="0 0 700 400" role="img" aria-label="列強の中国分割と民族運動年表">
+  <defs>
+    <clipPath id="chn">
+      <path d="M300,36 L325,42 L305,72 L260,96 L260,108 L255,144 L245,174
+               L215,192 L200,210 L190,204 L155,204 L140,186 L45,132 L25,90
+               L85,36 L125,60 L200,60 L235,30 L275,12 Z"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#chn)">
+    <polygon points="228,10 340,10 340,102 228,102" fill="var(--ru)" fill-opacity=".55"/>
+    <polygon points="232,92 278,92 278,128 232,128" fill="var(--de)" fill-opacity=".55"/>
+    <polygon points="175,122 268,122 268,170 175,170" fill="var(--uk)" fill-opacity=".5"/>
+    <polygon points="138,172 228,172 228,220 138,220" fill="var(--fr)" fill-opacity=".5"/>
+    <polygon points="228,158 260,158 260,192 228,192" fill="var(--jp)" fill-opacity=".55"/>
+  </g>
+  <path d="M300,36 L325,42 L305,72 L260,96 L260,108 L255,144 L245,174
+           L215,192 L200,210 L190,204 L155,204 L140,186 L45,132 L25,90
+           L85,36 L125,60 L200,60 L235,30 L275,12 Z"
+        fill="none" stroke="var(--ink)" stroke-width="1.6"/>
+  <ellipse cx="268" cy="188" rx="8" ry="13" fill="var(--jp)" fill-opacity=".55" stroke="var(--ink)"/>
+  <circle cx="216" cy="196" r="4" fill="var(--uk)" stroke="var(--ink)"/>
+  <circle cx="258" cy="110" r="4" fill="var(--uk)" stroke="var(--ink)"/>
+  <g font-family="sans-serif" font-size="11" fill="var(--ink)">
+    <text x="262" y="44">露：満洲・遼東半島</text>
+    <text x="228" y="86">独：山東半島</text>
+    <text x="150" y="146">英：長江流域</text>
+    <text x="126" y="230">仏：広東・広西・雲南</text>
+    <text x="272" y="176">日：福建</text>
+    <text x="280" y="196">台湾（1895〜日）</text>
+    <text x="196" y="212">香港</text>
+    <text x="266" y="110">威海衛</text>
+  </g>
+  <text x="30" y="250" font-family="sans-serif" font-size="12" fill="var(--sub)">
+    ※米は分割に出遅れ、門戸開放・機会均等・領土保全を宣言（1899・1900、国務長官ジョン=ヘイ）
+  </text>
+
+  <!-- 年表 -->
+  <g font-family="sans-serif" font-size="12" fill="var(--ink)">
+    <line x1="392" y1="20" x2="392" y2="380" stroke="var(--line)"/>
+    <text x="410" y="34" font-size="13" font-weight="bold">分割への中国側の反応</text>
+    <line x1="428" y1="48" x2="428" y2="330" stroke="var(--line)" stroke-width="2"/>
+    <g>
+      <circle cx="428" cy="70" r="5" fill="var(--panel)" stroke="var(--ink)" stroke-width="2"/>
+      <text x="444" y="66" font-weight="bold">変法運動（1898）</text>
+      <text x="444" y="84" font-size="11" fill="var(--sub)">康有為ら・上からの立憲改革 → 戊戌の政変で挫折</text>
+      <circle cx="428" cy="132" r="5" fill="var(--panel)" stroke="var(--ink)" stroke-width="2"/>
+      <text x="444" y="128" font-weight="bold">義和団運動（1900）</text>
+      <text x="444" y="146" font-size="11" fill="var(--sub)">扶清滅洋・排外運動 → 8か国出兵、北京議定書</text>
+      <circle cx="428" cy="194" r="5" fill="var(--panel)" stroke="var(--ink)" stroke-width="2"/>
+      <text x="444" y="190" font-weight="bold">辛亥革命（1911）</text>
+      <text x="444" y="208" font-size="11" fill="var(--sub)">孫文・三民主義 → 中華民国成立、清朝滅亡</text>
+      <circle cx="428" cy="256" r="5" fill="var(--panel)" stroke="var(--ink)" stroke-width="2"/>
+      <text x="444" y="252" font-weight="bold">五・四運動（1919）</text>
+      <text x="444" y="270" font-size="11" fill="var(--sub)">二十一か条要求の撤回要求・ヴェルサイユ条約調印拒否</text>
+      <circle cx="428" cy="318" r="5" fill="var(--ink)"/>
+      <text x="444" y="314" font-size="11" fill="var(--sub)">王朝の改革 → 民衆の排外 → 共和革命 → 大衆的民族運動へ</text>
+    </g>
+  </g>
+</svg>
+<div class="legend">
+  <span><i class="sw" style="background:var(--ru);opacity:.6"></i>ロシア</span>
+  <span><i class="sw" style="background:var(--de);opacity:.6"></i>ドイツ</span>
+  <span><i class="sw" style="background:var(--uk);opacity:.6"></i>イギリス</span>
+  <span><i class="sw" style="background:var(--fr);opacity:.6"></i>フランス</span>
+  <span><i class="sw" style="background:var(--jp);opacity:.6"></i>日本</span>
+</div>
+<figcaption>資料C　列強の勢力範囲（模式図）と中国側の反応。第4問（分割の構造）・第5問（日露戦争）・第7問（辛亥革命の限界）が同じ図から読めるようにした。</figcaption>
+</figure>
+
+<h2>資料D　インド民族運動の展開（1885〜1930）</h2>
+<figure>
+<svg viewBox="0 0 700 400" role="img" aria-label="インド民族運動年表">
+  <text x="150" y="28" font-family="sans-serif" font-size="14" font-weight="bold"
+        fill="var(--uk)" text-anchor="middle">イギリスの支配政策（弾圧）</text>
+  <text x="530" y="28" font-family="sans-serif" font-size="14" font-weight="bold"
+        fill="var(--fr)" text-anchor="middle">インド側の民族運動</text>
+  <line x1="350" y1="42" x2="350" y2="372" stroke="var(--line)" stroke-width="2"/>
+  <g font-family="sans-serif" font-size="12" fill="var(--ink)">
+    <g stroke="var(--line)">
+      <line x1="342" y1="70" x2="358" y2="70"/><line x1="342" y1="126" x2="358" y2="126"/>
+      <line x1="342" y1="182" x2="358" y2="182"/><line x1="342" y1="238" x2="358" y2="238"/>
+      <line x1="342" y1="294" x2="358" y2="294"/><line x1="342" y1="344" x2="358" y2="344"/>
+    </g>
+    <g text-anchor="middle" font-size="13" font-weight="bold" fill="var(--sub)">
+      <text x="350" y="66">1885</text><text x="350" y="122">1905</text>
+      <text x="350" y="178">1906</text><text x="350" y="234">1915-19</text>
+      <text x="350" y="290">1920</text><text x="350" y="340">1930</text>
+    </g>
+    <!-- 左（英） -->
+    <g text-anchor="end">
+      <text x="326" y="66" font-weight="bold">インド国民会議を発足させる</text>
+      <text x="326" y="84" font-size="11" fill="var(--sub)">知識人を懐柔する親英的諮問機関として</text>
+      <text x="326" y="122" font-weight="bold">ベンガル分割令</text>
+      <text x="326" y="140" font-size="11" fill="var(--sub)">ヒンドゥーとムスリムを分断し運動を弱める狙い</text>
+      <text x="326" y="178" font-weight="bold">全インド=ムスリム連盟を支援</text>
+      <text x="326" y="196" font-size="11" fill="var(--sub)">宗教対立を利用した分割統治</text>
+      <text x="326" y="234" font-weight="bold">ローラット法（1919）</text>
+      <text x="326" y="252" font-size="11" fill="var(--sub)">令状なし逮捕・裁判なし投獄／アムリットサール事件</text>
+      <text x="326" y="270" font-size="11" fill="var(--sub)">1919年インド統治法は自治にほど遠い内容</text>
+      <text x="326" y="340" font-weight="bold">塩の専売を維持</text>
+    </g>
+    <!-- 右（印） -->
+    <g>
+      <text x="374" y="66" font-weight="bold">インド国民会議 成立</text>
+      <text x="374" y="84" font-size="11" fill="var(--sub)">当初は穏健な請願団体</text>
+      <text x="374" y="122" font-weight="bold">カルカッタ大会 四綱領（1906）</text>
+      <text x="374" y="140" font-size="11" fill="var(--sub)">英貨排斥・スワデーシ・スワラージ・民族教育</text>
+      <text x="374" y="158" font-size="11" fill="var(--sub)">ティラクら急進派が主導、運動が反英に転換</text>
+      <text x="374" y="178" font-weight="bold">全インド=ムスリム連盟 結成</text>
+      <text x="374" y="234" font-weight="bold">ガンディー帰国（1915）</text>
+      <text x="374" y="252" font-size="11" fill="var(--sub)">大戦協力の見返りに自治を期待 → 裏切られる</text>
+      <text x="374" y="290" font-weight="bold">非暴力・不服従運動 開始</text>
+      <text x="374" y="308" font-size="11" fill="var(--sub)">サティヤーグラハ／農民・都市民衆を巻き込み大衆化</text>
+      <text x="374" y="340" font-weight="bold">塩の行進・第2次不服従運動</text>
+    </g>
+  </g>
+  <!-- 因果矢印 -->
+  <g fill="none" stroke="var(--ink)" stroke-width="1.6" marker-end="url(#ar2)" opacity=".7">
+    <defs><marker id="ar2" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="var(--ink)"/></marker></defs>
+    <path d="M336,116 C352,104 356,110 370,116"/>
+    <path d="M336,228 C352,216 356,222 370,284"/>
+  </g>
+  <rect x="60" y="360" width="580" height="30" fill="none" stroke="var(--line)"/>
+  <text x="350" y="380" text-anchor="middle" font-family="sans-serif" font-size="12.5"
+        fill="var(--ink)">分割統治と弾圧が、むしろ運動を反英化・大衆化させた（＝第6問の解答の骨格）</text>
+</svg>
+<figcaption>資料D　左に英の政策、右に民族運動を対置し、矢印で「弾圧→運動の激化」という因果を可視化。年代だけの羅列だった元図から、設問の論理そのものを図に落とした。</figcaption>
+</figure>
+
+<h2>再利用できる作図プロンプト</h2>
+<p>他の単元でも同じ水準の図版を出させるための雛形です。角括弧を埋めて使ってください。</p>
+<pre>あなたは高校世界史（山川出版社『詳説世界史』準拠）の図版デザイナーです。
+以下の条件で、入試の資料問題に耐える図版を1点、SVGで作成してください。
+
+【単元】[例：帝国主義とアフリカ分割]
+【図の種類】[勢力範囲地図／年表／系統図／因果関係図／比較表] から1つ
+【対応させる設問】
+  [例：Q1 アフリカ分割を促した要因を80字で説明せよ
+       Q2 分割を免れた2国を答えよ]
+
+【作図の原則】
+1. 図だけで設問に答えられること。設問の答えの根拠が、必ず図中の
+   位置・色・矢印・年代のいずれかとして視覚化されていること。
+   本文にしか書かれていない情報を前提にしない。
+2. 情報の階層を3段に統一する。
+   第1階層＝図形（地図の塗り分け・年表の軸）
+   第2階層＝太字ラベル（事件名・条約名・人物名）
+   第3階層＝小さい注記（内容の1行説明、11px相当）
+3. 表記は『詳説世界史』の用語・年代に合わせる。
+   （例：ベンガル分割令、四綱領、扶清滅洋、門戸開放宣言）
+   教科書にない俗称・略称は使わない。
+4. 色は勢力・立場ごとに固定し、凡例を必ず付ける。
+   英＝赤系／仏＝青系／独＝緑系／露＝青灰／日＝赤紫／伊＝黄／
+   独立国・中立＝灰。塗りは不透明度0.5〜0.6にして文字を殺さない。
+5. 因果と対立は矢印で示す。
+   実線矢印＝因果・発展、破線矢印＝進出方向・政策、
+   ×印や二重線＝衝突・挫折。
+6. 地図は正確な国境を装わない。輪郭は概略でよいが、
+   「模式図」「国境は概略」と明記する。位置関係（南北・内陸沿岸・
+   河川流域）は必ず正しくする。
+7. 対立構造がある単元は左右2列に対置する
+   （例：左＝宗主国の政策、右＝現地の民族運動）。
+   時間軸は中央に縦に置き、両側の出来事を同じ年代線で結ぶ。
+8. 文字は最小11px相当、モノクロ印刷でも判読できるよう
+   色だけに意味を持たせない（ラベルを併記する）。
+
+【出力】
+- 単一のSVG（外部リソース参照なし、フォントはsans-serif指定）
+- 図の下に3行以内のキャプション（何の図か・出典に相当する年代・注記）
+- 最後に「この図で答えられる設問」を箇条書きで列挙</pre>
+
+<h3>元の3図に共通していた問題点</h3>
+<table>
+<tr><th>問題</th><th>具体例</th><th>直し方</th></tr>
+<tr><td>図が文字の箱でしかない</td><td>資料Bが「北部（仏・英）」等の4ブロック</td><td>地理的位置を持つ地図に置換</td></tr>
+<tr><td>設問の答えが図から読めない</td><td>ファショダ事件が図に無い</td><td>縦断・横断の矢印と交点を図示</td></tr>
+<tr><td>年表が出来事の羅列</td><td>資料Dが年号と語句だけ</td><td>英の政策／民族運動を対置し因果矢印を追加</td></tr>
+<tr><td>情報の軽重が無い</td><td>すべて同じ大きさの文字</td><td>太字ラベルと小注記の2階層に分離</td></tr>
+</table>
+</div>
