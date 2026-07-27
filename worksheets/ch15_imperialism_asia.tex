@@ -1,0 +1,653 @@
+\documentclass[a4paper,11pt]{ltjsarticle}
+
+% LuaLaTeXでコンパイル
+\usepackage[margin=18mm]{geometry}
+\usepackage{luatexja-fontspec}
+\usepackage{graphicx}
+\usepackage[table]{xcolor}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,calc,decorations.pathmorphing}
+
+\setmainjfont{Noto Sans JP}
+\setsansjfont{Noto Sans JP}
+
+\definecolor{navy}{HTML}{173B57}
+\definecolor{teal}{HTML}{167D8D}
+\definecolor{pale}{HTML}{EAF2F4}
+\definecolor{ink}{HTML}{263238}
+\definecolor{brit}{HTML}{C0392B}
+\definecolor{fran}{HTML}{2E86C1}
+\definecolor{germ}{HTML}{7D6608}
+\definecolor{russ}{HTML}{6C3483}
+\definecolor{japn}{HTML}{117A65}
+\definecolor{indep}{HTML}{F1C40F}
+\definecolor{land}{HTML}{F5F0E6}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small 第15章　帝国主義とアジアの民族運動}
+\rhead{\small 資料読解問題}
+\cfoot{\small \thepage}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+% 問題番号
+\newcounter{question}
+
+\newenvironment{question}[1]{%
+  \refstepcounter{question}
+  \begin{tcolorbox}[
+    colback=white,
+    colframe=navy,
+    boxrule=0.8pt,
+    arc=1mm,
+    title={第\thequestion 問　#1},
+    fonttitle=\bfseries,
+    coltitle=white,
+    colbacktitle=navy
+  ]
+}{%
+  \end{tcolorbox}
+}
+
+% 図版差し込み用
+\newcommand{\figureinsert}[2]{%
+  \begin{tcolorbox}[
+    colback=pale,
+    colframe=teal,
+    boxrule=0.6pt,
+    arc=1mm,
+    title={#1},
+    fonttitle=\bfseries
+  ]
+    #2
+  \end{tcolorbox}
+}
+
+% 図版共通スタイル
+\tikzset{
+  boxnode/.style={
+    draw=navy, fill=white, rounded corners=1mm,
+    align=center, inner sep=3pt, font=\small
+  },
+  keynode/.style={
+    draw=navy, fill=navy!12, rounded corners=1mm,
+    align=center, inner sep=3pt, font=\small\bfseries
+  },
+  flow/.style={-{Latex[length=2.2mm]}, draw=teal, line width=0.8pt},
+  flowb/.style={-{Latex[length=2.2mm]}, draw=navy, line width=0.8pt},
+  lbl/.style={font=\scriptsize, inner sep=1.5pt, fill=pale}
+}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries\color{navy}
+  第15章　帝国主義とアジアの民族運動}\\[2mm]
+
+  {\Large 地図と表で解く世界史　資料読解問題10題}
+\end{center}
+
+\vspace{3mm}
+
+\begin{tabularx}{\textwidth}{X X}
+氏名：\hrulefill & 実施日：\hrulefill
+\end{tabularx}
+
+\begin{tcolorbox}[
+  colback=pale,
+  colframe=teal,
+  boxrule=0.5pt
+]
+教科書258〜277頁を範囲とする。
+
+資料は学習用に再構成した模式図とし、縮尺・国境線・勢力圏を
+厳密な地理表現と誤認しないこと。
+\end{tcolorbox}
+
+%================================================
+% 第1問
+%================================================
+
+\begin{question}{帝国主義の共通点}
+
+\figureinsert{資料A　列強の海外進出（模式図）}{
+\centering
+\begin{tikzpicture}[node distance=4mm]
+
+\node[keynode, minimum width=30mm, minimum height=9mm] (uk) at (0,2.1) {イギリス};
+\node[keynode, minimum width=30mm, minimum height=9mm] (fr) at (0,0.9) {フランス};
+\node[keynode, minimum width=30mm, minimum height=9mm, fill=germ!15] (de) at (0,-0.3) {ドイツ（後発）};
+\node[keynode, minimum width=30mm, minimum height=9mm] (us) at (0,-1.5) {アメリカ・日本};
+
+\node[draw=navy, fill=white, rounded corners=1mm, minimum width=27mm,
+      minimum height=42mm, align=center, font=\small] (col) at (8.4,0.3)
+      {アジア\\アフリカ\\ラテンアメリカ\\[2mm]（植民地・\\従属地域）};
+
+\node[draw=teal, fill=white, rounded corners=1mm, align=center,
+      font=\scriptsize, minimum width=26mm] (m1) at (4.3,2.2)
+      {工業製品の\textbf{市場}};
+\node[draw=teal, fill=white, rounded corners=1mm, align=center,
+      font=\scriptsize, minimum width=26mm] (m2) at (4.3,1.1)
+      {\textbf{原料}・食料の供給地};
+\node[draw=teal, fill=white, rounded corners=1mm, align=center,
+      font=\scriptsize, minimum width=26mm] (m3) at (4.3,0.0)
+      {余剰資本の\textbf{投資先}};
+\node[draw=teal, fill=white, rounded corners=1mm, align=center,
+      font=\scriptsize, minimum width=26mm] (m4) at (4.3,-1.1)
+      {\textbf{軍事拠点}・航路};
+
+\draw[flowb] (uk.east) -- (m1.west);
+\draw[flowb] (fr.east) -- (m2.west);
+\draw[flowb] (de.east) -- (m3.west);
+\draw[flowb] (us.east) -- (m4.west);
+
+\draw[flow] (m1.east) -- (col.west |- m1.east);
+\draw[flow] (m2.east) -- (col.west |- m2.east);
+\draw[flow] (m3.east) -- (col.west |- m3.east);
+\draw[flow] (m4.east) -- (col.west |- m4.east);
+
+\draw[{Latex[length=2.2mm]}-{Latex[length=2.2mm]}, draw=brit,
+      line width=1pt, dashed] (uk.west) to[out=180,in=180,looseness=1.4] (de.west);
+\node[lbl, text=brit, fill=white] at (-2.55,0.9) {\rotatebox{90}{勢力圏をめぐる対立}};
+
+\node[font=\scriptsize\bfseries, text=navy] at (0,-2.5) {本国（列強）};
+\node[font=\scriptsize\bfseries, text=navy] at (4.3,-2.5) {進出の目的};
+\node[font=\scriptsize\bfseries, text=navy] at (8.4,-2.5) {進出先};
+
+\end{tikzpicture}
+}
+
+資料Aを見て、列強の海外進出に共通する目的を二つ挙げなさい。
+
+また、後発国ドイツの進出が列強関係を緊張させた理由を、
+80字以内で説明しなさい。
+
+\vspace{25mm}
+
+\end{question}
+
+%================================================
+% 第2問
+%================================================
+
+\begin{question}{アフリカ分割}
+
+\figureinsert{資料B　アフリカ分割（模式図）}{
+\centering
+\begin{tikzpicture}[scale=0.95]
+
+\fill[land, draw=navy, line width=0.7pt]
+  (0,6) -- (4.6,6) -- (4.6,4.6) -- (3.6,3.6) -- (3.4,1.6)
+  -- (2.4,0) -- (1.4,0.2) -- (0.6,2.0) -- (0,3.4) -- cycle;
+
+\fill[fran, opacity=0.30] (0,6) -- (4.6,6) -- (4.6,5.1) -- (0.25,5.1) -- cycle;
+\fill[fran, opacity=0.30] (0,5.1) -- (1.5,5.1) -- (1.2,3.6) -- (0.35,3.6) -- cycle;
+\fill[brit, opacity=0.30] (3.5,5.1) -- (4.6,5.1) -- (4.6,4.6) -- (3.6,3.6)
+  -- (3.45,2.3) -- (2.9,2.3) -- (3.0,3.8) -- cycle;
+\fill[brit, opacity=0.30] (2.4,0) -- (1.4,0.2) -- (1.6,1.2) -- (3.0,1.2) -- cycle;
+\fill[germ, opacity=0.35] (0.75,1.4) -- (1.55,1.4) -- (1.75,2.6) -- (0.95,2.6) -- cycle;
+\fill[indep, opacity=0.55] (3.75,4.0) -- (4.35,4.3) -- (4.15,3.5) -- (3.6,3.55) -- cycle;
+\fill[indep, opacity=0.55] (0.55,4.3) circle (0.28);
+
+\draw[-{Latex[length=2.6mm]}, brit, line width=1.4pt]
+  (4.05,5.75) -- (4.05,4.55) -- (3.15,2.6) -- (2.3,0.55);
+\node[font=\scriptsize\bfseries, text=brit, fill=white, inner sep=1pt]
+  at (5.35,3.2) {イギリス\\縦断政策};
+\draw[brit, line width=0.4pt] (4.6,3.2) -- (3.2,2.9);
+
+\draw[-{Latex[length=2.6mm]}, fran, line width=1.4pt]
+  (0.35,5.35) -- (2.6,5.35) -- (4.3,4.95);
+\node[font=\scriptsize\bfseries, text=fran, fill=white, inner sep=1pt]
+  at (2.2,6.45) {フランス　横断政策};
+
+\node[font=\scriptsize, fill=white, inner sep=1pt, draw=navy, rounded corners=0.5mm]
+  at (5.6,4.85) {ファショダ事件\\（1898）};
+\draw[navy, line width=0.4pt, dashed] (4.75,4.85) -- (4.15,5.05);
+
+\node[font=\scriptsize\bfseries, text=indep, fill=white, inner sep=1pt]
+  at (5.7,3.95) {エチオピア};
+\draw[line width=0.4pt] (4.9,3.95) -- (4.3,3.95);
+\node[font=\scriptsize\bfseries, text=indep!70!black, fill=white, inner sep=1pt]
+  at (-0.9,4.3) {リベリア};
+\draw[line width=0.4pt] (-0.25,4.3) -- (0.28,4.3);
+
+\node[font=\scriptsize, text=germ!60!black] at (1.3,2.0) {独};
+\node[font=\scriptsize, text=brit!70!black] at (2.25,0.75) {英（南ア）};
+
+\node[draw=navy, fill=white, rounded corners=1mm, align=left,
+      font=\scriptsize, inner sep=3pt] at (7.6,1.6)
+  {\textbf{ベルリン会議（1884〜85）}\\
+   ・コンゴ問題を調整\\
+   ・分割の原則を確認\\[1mm]
+   \textbf{「実効支配」の原則}\\
+   　領有宣言だけでは不可。\\
+   　実際に統治した国の\\
+   　領有を承認する。\\[1mm]
+   → 分割競争が加速};
+
+\end{tikzpicture}
+}
+
+資料B中の「実効支配」原則とは何か。
+
+ベルリン会議との関係に触れて説明しなさい。また、アフリカ分割を
+免れて独立を維持した二国を答えなさい。
+
+\vspace{25mm}
+
+\end{question}
+
+%================================================
+% 第3問
+%================================================
+
+\begin{question}{南アフリカ戦争}
+
+「金・ダイヤモンド資源」「ケープ植民地」「ブール人」という
+三語をすべて用い、南アフリカ戦争が起こった背景を
+100字以内で説明しなさい。
+
+\vspace{35mm}
+
+\end{question}
+
+%================================================
+% 第4問
+%================================================
+
+\begin{question}{列強による中国分割}
+
+\figureinsert{資料C　中国をめぐる列強の進出（模式地図）}{
+\centering
+\begin{tikzpicture}[scale=0.95]
+
+\fill[land, draw=navy, line width=0.7pt]
+  (0,0.6) -- (0.9,3.4) -- (3.4,4.2) -- (6.4,3.9) -- (7.1,2.9)
+  -- (6.6,1.7) -- (5.0,0.8) -- (2.6,0.0) -- cycle;
+\node[font=\small\bfseries, text=navy] at (2.9,2.2) {清（中国）};
+
+\fill[russ, opacity=0.25] (0.9,3.4) -- (3.4,4.2) -- (6.4,3.9) -- (6.2,3.2)
+  -- (1.2,3.0) -- cycle;
+\node[font=\scriptsize, text=russ] at (3.3,3.6) {ロシア（満洲・モンゴル）};
+
+\fill[germ, opacity=0.30] (5.6,3.1) -- (6.3,3.2) -- (6.3,2.7) -- (5.6,2.7) -- cycle;
+\node[font=\scriptsize, text=germ!60!black] at (5.95,2.9) {独};
+
+\fill[brit, opacity=0.25] (2.6,2.3) -- (6.5,2.5) -- (6.5,1.8) -- (2.8,1.5) -- cycle;
+\node[font=\scriptsize, text=brit] at (4.3,2.0) {イギリス（長江流域）};
+
+\fill[fran, opacity=0.25] (2.6,0.15) -- (4.9,0.9) -- (4.6,1.5) -- (2.6,0.85) -- cycle;
+\node[font=\scriptsize, text=fran] at (3.6,0.75) {仏（華南）};
+
+\draw[-{Latex[length=2.4mm]}, russ, line width=1.2pt] (3.0,5.4) -- (3.0,4.35);
+\node[font=\scriptsize\bfseries, text=russ] at (3.0,5.65) {ロシア（南下）};
+\node[font=\scriptsize, draw=russ, fill=white, rounded corners=0.5mm, inner sep=1.5pt]
+  at (6.9,4.6) {旅順・大連};
+\draw[russ, line width=0.4pt] (6.5,4.35) -- (6.2,3.85);
+
+\draw[-{Latex[length=2.4mm]}, germ, line width=1.2pt] (8.4,2.9) -- (6.6,2.9);
+\node[font=\scriptsize\bfseries, text=germ!60!black] at (9.1,3.15) {ドイツ};
+\node[font=\scriptsize, draw=germ, fill=white, rounded corners=0.5mm, inner sep=1.5pt]
+  at (8.9,2.55) {膠州湾};
+
+\draw[-{Latex[length=2.4mm]}, brit, line width=1.2pt] (8.4,1.6) -- (6.7,1.85);
+\node[font=\scriptsize\bfseries, text=brit] at (9.1,1.85) {イギリス};
+\node[font=\scriptsize, draw=brit, fill=white, rounded corners=0.5mm, inner sep=1.5pt]
+  at (8.85,1.2) {威海衛・九竜};
+
+\draw[-{Latex[length=2.4mm]}, fran, line width=1.2pt] (4.4,-1.0) -- (4.0,0.35);
+\node[font=\scriptsize\bfseries, text=fran] at (4.6,-1.3) {フランス};
+\node[font=\scriptsize, draw=fran, fill=white, rounded corners=0.5mm, inner sep=1.5pt]
+  at (6.5,-0.9) {広州湾};
+\draw[fran, line width=0.4pt] (5.6,-0.9) -- (4.6,-0.55);
+
+\draw[-{Latex[length=2.4mm]}, japn, line width=1.2pt] (8.4,0.2) -- (6.2,0.9);
+\node[font=\scriptsize\bfseries, text=japn] at (9.0,0.1) {日本};
+\node[font=\scriptsize, draw=japn, fill=white, rounded corners=0.5mm, inner sep=1.5pt]
+  at (8.6,-0.5) {台湾・福建};
+
+\node[font=\scriptsize, draw=navy, fill=white, rounded corners=0.5mm,
+      align=left, inner sep=2.5pt] at (0.9,-1.1)
+  {三国干渉（1895）→ 租借地・鉄道敷設権の獲得競争\\
+   アメリカは門戸開放・機会均等・領土保全を提唱};
+
+\end{tikzpicture}
+}
+
+資料Cの進出方向を参考に、三国干渉後の中国で列強が獲得した
+権益の例を二つ挙げなさい。
+
+また、義和団運動が列強への反発として拡大した理由を説明しなさい。
+
+\vspace{30mm}
+
+\end{question}
+
+%================================================
+% 第5問
+%================================================
+
+\begin{question}{日露戦争と東アジア}
+
+次の空欄を完成させなさい。
+
+\begin{enumerate}[label=\textcircled{\arabic*},leftmargin=3em]
+  \item 講和条約名
+        （\hspace{45mm}）
+
+  \item 日本が得た鉄道権益
+        （\hspace{35mm}鉄道）
+
+  \item 韓国に対する日本の立場
+        （\hspace{35mm}権の承認）
+\end{enumerate}
+
+さらに、日露戦争の結果が東アジアの国際関係に与えた影響を
+説明しなさい。
+
+\vspace{30mm}
+
+\end{question}
+
+%================================================
+% 第6問
+%================================================
+
+\begin{question}{インド民族運動}
+
+\figureinsert{資料D　インド民族運動の展開（年表）}{
+\centering
+\begin{tikzpicture}[scale=1.0]
+
+\draw[-{Latex[length=3mm]}, line width=1.2pt, navy] (0,0) -- (13.2,0);
+
+\foreach \x/\y in {0.6/1885, 3.0/1905, 4.4/1906, 7.2/1919, 9.4/1920, 11.9/1930}{
+  \fill[teal] (\x,0) circle (1.5pt);
+  \node[font=\scriptsize\bfseries, text=navy, below=1.5mm] at (\x,0) {\y};
+}
+
+\node[boxnode, above=4mm, text width=20mm] at (0.6,0) {インド国民\\会議創設};
+\node[boxnode, above=15mm, text width=22mm, fill=brit!12] at (3.0,0)
+  {\textbf{ベンガル\\分割令}\\（英の分断策）};
+\node[boxnode, above=4mm, text width=26mm] at (4.6,0)
+  {カルカッタ大会\\スワデーシ・スワラージ\\英貨排斥・民族教育};
+\node[boxnode, above=15mm, text width=24mm, fill=brit!12] at (7.2,0)
+  {\textbf{ローラット法}\\アムリットサル\\事件};
+\node[boxnode, above=4mm, text width=22mm] at (9.6,0)
+  {ガンディー\\非暴力・不服従\\（非協力運動）};
+\node[boxnode, above=15mm, text width=20mm] at (11.9,0)
+  {塩の行進\\完全独立\\（プールナ=\\スワラージ）};
+
+\draw[flow] (3.0,1.1) .. controls (3.4,0.75) .. (4.0,0.62);
+\draw[flow] (7.2,1.1) .. controls (7.8,0.75) .. (8.7,0.62);
+
+\node[font=\scriptsize, text=brit] at (2.0,2.75) {\textbf{弾圧・分断}};
+\node[font=\scriptsize, text=teal] at (11.0,2.75) {\textbf{反発 → 運動の大衆化}};
+
+\end{tikzpicture}
+}
+
+資料Dから、1905年以降にインド民族運動が大衆化した契機を
+二つ選び、因果関係が分かるように説明しなさい。
+
+また、ガンディーが展開した運動の特徴を答えなさい。
+
+\vspace{30mm}
+
+\end{question}
+
+%================================================
+% 第7問
+%================================================
+
+\begin{question}{辛亥革命}
+
+\figureinsert{資料F　辛亥革命関係図}{
+\centering
+\begin{tikzpicture}[scale=1.0]
+
+\node[keynode, text width=24mm] (a) at (0,2.2) {興中会（1894）\\孫文};
+\node[keynode, text width=28mm] (b) at (3.9,2.2) {中国同盟会（1905）\\東京で結成};
+\node[boxnode, text width=34mm, fill=teal!12] (c) at (8.6,2.2)
+  {\textbf{三民主義}\\民族／民権／民生};
+
+\node[boxnode, text width=26mm] (d) at (0,0.2) {鉄道国有化反対\\運動（1911）};
+\node[keynode, text width=24mm] (e) at (3.9,0.2) {武昌蜂起\\（1911.10）};
+\node[keynode, text width=32mm, fill=teal!15] (f) at (8.6,0.2)
+  {中華民国成立（1912）\\臨時大総統　孫文};
+
+\node[boxnode, text width=26mm, fill=brit!12] (g) at (0,-2.0)
+  {\textbf{袁世凱}\\清朝の実力者};
+\node[boxnode, text width=28mm, fill=brit!12] (h) at (3.9,-2.0)
+  {宣統帝退位と引きかえに\\臨時大総統に就任};
+\node[boxnode, text width=32mm, fill=brit!12] (i) at (8.6,-2.0)
+  {国民党弾圧・独裁\\軍閥の割拠へ};
+
+\draw[flowb] (a) -- (b);
+\draw[flowb] (b) -- (c);
+\draw[flowb] (d) -- (e);
+\draw[flowb] (e) -- (f);
+\draw[flowb] (g) -- (h);
+\draw[flowb] (h) -- (i);
+\draw[flowb] (c.south) -- ++(0,-0.5) -| (5.6,0.2);
+\draw[flow, draw=brit] (f.south) -- (i.north)
+  node[lbl, midway, fill=pale, text=brit] {主導権が移る};
+
+\node[font=\scriptsize, text=brit, align=center] at (0,-3.1)
+  {清朝は倒れたが\\共和政は定着せず};
+
+\end{tikzpicture}
+}
+
+孫文が唱えた三民主義の内容を三つ答えなさい。
+
+さらに、辛亥革命が清朝を倒したにもかかわらず、革命の目標が
+十分に達成されなかった理由を、袁世凱に触れて説明しなさい。
+
+\vspace{30mm}
+
+\end{question}
+
+%================================================
+% 第8問
+%================================================
+
+\begin{question}{西アジアの立憲運動}
+
+\figureinsert{資料E　アジア諸地域の民族運動（比較表）}{
+\renewcommand{\arraystretch}{1.25}
+\small
+\begin{tabularx}{\linewidth}{|>{\bfseries}p{20mm}|p{26mm}|X|X|}
+\hline
+\rowcolor{navy!12}
+地域 & おもな動き & 要求・主張 & 結果 \\
+\hline
+イラン & タバコ=ボイコット運動（1891）\newline イラン立憲革命（1905〜11） &
+専制の打破、憲法制定と議会（国民議会）の開設 &
+議会は開設されたが、英露の介入で挫折 \\
+\hline
+オスマン\newline 帝国 & 青年トルコ革命（1908） &
+停止されていたミドハト憲法の復活と議会の再開 &
+憲法は復活したが、その後は統一と進歩団の独裁的支配へ \\
+\hline
+インド & ベンガル分割令への反対（1905）\newline 非協力運動（1920） &
+スワラージ（自治）・スワデーシ（国産品愛用） &
+運動が大衆化し、独立運動へ発展 \\
+\hline
+ベトナム & 東遊（ドンズー）運動（1905〜） &
+日本に学び、フランスからの独立を目指す &
+日仏協約により留学生は追放される \\
+\hline
+\end{tabularx}
+}
+
+イラン立憲革命と青年トルコ革命の共通点を一つ、
+相違点を一つ、資料Eを用いて説明しなさい。
+
+\vspace{30mm}
+
+\end{question}
+
+%================================================
+% 第9問
+%================================================
+
+\begin{question}{東南アジアの民族運動}
+
+\figureinsert{資料G　東南アジアの民族運動}{
+\centering
+\begin{tikzpicture}[scale=1.0]
+
+\node[keynode, text width=30mm, fill=japn!15] (jp) at (0,1.3)
+  {\textbf{日露戦争（1904〜05）}\\日本がロシアに勝利};
+\node[boxnode, text width=34mm] (im) at (4.9,1.3)
+  {「アジアの国でも\\ヨーロッパの列強に\\対抗できる」という自覚};
+\node[keynode, text width=32mm, fill=teal!12] (dz) at (10.0,1.3)
+  {\textbf{東遊（ドンズー）運動}\\ファン=ボイ=チャウ\\青年を日本へ留学};
+
+\draw[flowb] (jp) -- (im);
+\draw[flowb] (im) -- (dz);
+
+\node[boxnode, text width=32mm, fill=brit!10] (fr) at (10.0,-0.6)
+  {日仏協約（1907）で\\留学生は追放され挫折};
+\draw[flow, draw=brit] (dz) -- (fr);
+
+\node[font=\scriptsize\bfseries, text=navy] at (0,-0.35) {宗主国と民族運動};
+
+\node[draw=navy, fill=white, rounded corners=1mm, align=left,
+      font=\scriptsize, inner sep=3pt, text width=62mm] at (3.3,-1.9)
+  {ベトナム …… \textbf{フランス}（仏領インドシナ連邦）\\
+   インドネシア …… \textbf{オランダ}（ブディ=ウトモ、サレカット=イスラム）\\
+   フィリピン …… \textbf{スペイン→アメリカ}（ホセ=リサール、アギナルド）\\
+   ビルマ・マレー半島 …… \textbf{イギリス}\\
+   タイ（シャム） …… \textbf{独立を維持}（英仏の緩衝地帯）};
+
+\end{tikzpicture}
+}
+
+ファン＝ボイ＝チャウが日本に期待した理由を、日露戦争の結果と
+東遊運動に触れて説明しなさい。
+
+また、当時ベトナムを植民地支配していた国を答えなさい。
+
+\vspace{30mm}
+
+\end{question}
+
+%================================================
+% 第10問
+%================================================
+
+\begin{question}{総合資料問題}
+
+帝国主義は、列強にとっては国家間競争を激化させ、
+アジア・アフリカ側には民族運動を生み出した。
+
+第1問から第9問までの資料から具体例を三つ選び、
+200字以内でこの連鎖を論述しなさい。
+
+\vspace{55mm}
+
+\end{question}
+
+%================================================
+% 解答・解説
+%================================================
+
+\clearpage
+
+\begin{center}
+  {\LARGE\bfseries\color{navy} 解答・解説}
+\end{center}
+
+\begin{description}[
+  style=nextline,
+  leftmargin=0pt,
+  labelindent=0pt
+]
+
+\item[第1問]
+
+原料・市場の獲得、投資先・軍事拠点・交通路の確保など。
+
+ドイツは統一と工業化の後に植民地獲得へ参入したため、
+既得権をもつイギリスやフランスとの競争を激化させた。
+
+\item[第2問]
+
+実効支配とは、単なる領有宣言ではなく、現地を実際に統治している
+国の領有を認める考え方である。
+
+ベルリン会議後、この原則にもとづくアフリカ分割が加速した。
+独立を維持した国はエチオピアとリベリアである。
+
+\item[第3問]
+
+イギリスがケープ植民地から北進し、金・ダイヤモンド資源をもつ
+ブール人国家への支配を強めようとしたため、両者が衝突した。
+
+\item[第4問]
+
+権益の例として、ドイツの膠州湾、ロシアの旅順・大連、
+イギリスの九竜半島・威海衛、フランスの広州湾の租借などがある。
+
+列強の進出やキリスト教布教への反感、生活不安などを背景に、
+義和団運動が拡大した。
+
+\item[第5問]
+
+\begin{enumerate}[label=\textcircled{\arabic*}]
+  \item ポーツマス条約
+  \item 南満洲鉄道
+  \item 優越
+\end{enumerate}
+
+日本の南満洲進出と韓国保護国化が進み、ロシアの南下は後退した。
+
+\item[第6問]
+
+ベンガル分割令への反発、スワデーシ、英貨排斥、民族教育、
+ローラット法、アムリットサル事件への反発などが契機となった。
+
+ガンディーは非暴力・不服従を掲げ、民族運動への民衆参加を広げた。
+
+\item[第7問]
+
+三民主義は、民族・民権・民生である。
+
+清朝崩壊後、袁世凱が臨時大総統となって権力を集中したため、
+共和政と民主政治が定着しなかった。
+
+\item[第8問]
+
+共通点は、専制政治に反対して憲法・議会を求めたことである。
+
+イランでは立憲革命による議会開設が目指されたのに対し、
+オスマン帝国では青年トルコが停止されていた憲法の復活を求めた。
+
+\item[第9問]
+
+日本がロシアに勝利したことを、アジア人がヨーロッパ列強に
+対抗できる証拠と考えたためである。
+
+ファン＝ボイ＝チャウは東遊運動を展開し、青年を日本に留学させた。
+ベトナムの植民地支配国はフランスである。
+
+\item[第10問]
+
+解答例：
+
+列強のアフリカ分割は、資源や市場をめぐる国家間競争を激化させた。
+中国では列強による勢力圏分割が義和団運動や辛亥革命の背景となった。
+インドではベンガル分割令やイギリスの弾圧への反発によって
+民族運動が大衆化し、ガンディーの非暴力・不服従運動へつながった。
+
+\end{description}
+
+\end{document}
