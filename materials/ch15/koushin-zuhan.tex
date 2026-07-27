@@ -1,0 +1,100 @@
+%% ============================================================
+%% koushin-zuhan.tex --- 厚胤塾 図版・表マクロ（koushin-base v2 仕様）
+%% 「koushin-base v2 図版・表 全パターン検証」PDF の規格を再実装したもの。
+%%   用紙 A4・余白 20mm・本文幅 170mm
+%%   社会系モード: S=70mm / M=110mm / L=160mm・高さ上限 100mm
+%%   理数系モード: S=60mm / M=85mm  / L=120mm・高さ上限 70mm
+%%   表マクロ: \hyoA(170mm・横罫のみ) / \hyoAgrid(170mm・格子)
+%%             \hyoB(120mm) / \hyoC(100mm)
+%% 使い方: \input{koushin-base} → \input{koushin-sekaishi} → \input{koushin-zuhan}
+%% ============================================================
+
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{colortbl}
+
+%% ---------- v2 用紙設定（余白20mm・本文幅170mm） ----------
+\geometry{top=20mm,bottom=20mm,left=20mm,right=20mm}
+\setlength{\headheight}{28pt}
+
+%% ---------- 図版サイズモード ----------
+\newlength{\zuSw}\newlength{\zuMw}\newlength{\zuLw}\newlength{\zuHmax}
+\newcommand{\shakaimode}{%
+  \setlength{\zuSw}{70mm}\setlength{\zuMw}{110mm}%
+  \setlength{\zuLw}{160mm}\setlength{\zuHmax}{100mm}}
+\newcommand{\risuumode}{%
+  \setlength{\zuSw}{60mm}\setlength{\zuMw}{85mm}%
+  \setlength{\zuLw}{120mm}\setlength{\zuHmax}{70mm}}
+\shakaimode % 既定は社会系
+
+%% ---------- 図キャプション（図 N　タイトル） ----------
+\newcommand{\zucaption}[1]{%
+  \par\vspace{2pt}\centerline{\small 図\,\thefigure\quad #1}\vspace{4pt}}
+
+%% \zu[S|M|L]{キャプション}{中身}
+%%   中身は所定幅で作図済みの box（tikzpicture 等）を想定
+\newcommand{\zu}[3][M]{%
+  \begin{center}#3\end{center}%
+  \refstepcounter{figure}\zucaption{#2}}
+
+%% \zunarabi[S]{cap1}{body1}{cap2}{body2}（横並び・間隔6mm）
+\newcommand{\zunarabi}[5][S]{%
+  \begin{center}%
+  \begin{minipage}[t]{\zuSw}\centering #3\par
+    \refstepcounter{figure}{\small 図\,\thefigure\quad #2}\end{minipage}%
+  \hspace{6mm}%
+  \begin{minipage}[t]{\zuSw}\centering #5\par
+    \refstepcounter{figure}{\small 図\,\thefigure\quad #4}\end{minipage}%
+  \end{center}}
+
+%% \zuhaba{幅}{キャプション}{中身}（例外的に任意幅）
+\newcommand{\zuhaba}[3]{%
+  \begin{center}#3\end{center}%
+  \refstepcounter{figure}\zucaption{#2}}
+
+%% ---------- 表キャプション（表 N　タイトル・上置き） ----------
+\newcommand{\hyocaption}[1]{%
+  \refstepcounter{table}%
+  \centerline{\textcolor{mainBlue}{\textgt{表\,\thetable\quad #1}}}\vspace{3pt}}
+
+%% ---------- 表ヘッダ行書式（紺地・白ゴシック） ----------
+\newcommand{\hyoheadrow}{\rowcolor{mainBlue}}
+\newcommand{\hyohead}[1]{\textcolor{white}{\textgt{#1}}}
+
+%% ---------- 表マクロ ----------
+%% 使い方（tabularx は環境フォームで直接書く）:
+%%   \begin{hyoA}{キャプション}
+%%     \begin{tabularx}{\hyoAw}{lX} ... \end{tabularx}
+%%   \end{hyoA}
+%% 幅: \hyoAw=170mm（hyoA/hyoAgrid） / \hyoBw=120mm / \hyoCw=100mm
+\newlength{\hyoAw}\setlength{\hyoAw}{170mm}
+\newlength{\hyoBw}\setlength{\hyoBw}{120mm}
+\newlength{\hyoCw}\setlength{\hyoCw}{100mm}
+\newenvironment{hyoA}[1]{\begin{center}\hyocaption{#1}}{\end{center}}
+\newenvironment{hyoAgrid}[1]{\begin{center}\hyocaption{#1}}{\end{center}}
+\newenvironment{hyoB}[1]{\begin{center}\hyocaption{#1}}{\end{center}}
+\newenvironment{hyoC}[1]{\begin{center}\hyocaption{#1}}{\end{center}}
+
+%% ---------- 資料バンド（紺帯・白文字：資料A　タイトル） ----------
+\newcommand{\shiryoband}[2]{%
+  \par\noindent\begin{tcolorbox}[enhanced,colback=mainBlue,colframe=mainBlue,
+    boxrule=0pt,arc=1pt,left=6pt,right=6pt,top=3pt,bottom=3pt]
+    \textcolor{white}{\textgt{#1\quad #2}}
+  \end{tcolorbox}\vspace{2pt}}
+
+%% ---------- 大問見出し（第N問　タイトル） ----------
+\newcommand{\daimon}[2]{%
+  \par\vspace{1.2\Cvs}%
+  {\noindent\setlength{\parindent}{0pt}%
+   {\color{accentColor}\rule[-0.55zh]{2.2mm}{1.9zh}}\hspace{1.2mm}%
+   {\gtfamily\large\textcolor{mainBlue}{第#1問}\hspace{0.8zw}#2}\par}%
+  \vspace{0.35\Cvs}}
+
+%% ---------- 解答見出し（紺帯：解答　第N問） ----------
+\newcommand{\kaitouband}[1]{%
+  \par\vspace{0.6\Cvs}%
+  \noindent\begin{tcolorbox}[enhanced,colback=mainBlue!8,colframe=mainBlue!8,
+    boxrule=0pt,arc=1pt,left=6pt,right=6pt,top=2.5pt,bottom=2.5pt,
+    borderline west={2.5pt}{0pt}{mainBlue}]
+    {\gtfamily\textcolor{mainBlue}{#1}}
+  \end{tcolorbox}\vspace{1pt}}

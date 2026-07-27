@@ -1,0 +1,369 @@
+%% ============================================================
+%% koushin-base.tex --- 厚胤塾 共通プリアンブル（全科目共通）
+%% ------------------------------------------------------------
+%% 対応環境: platex + dvipdfmx（Cloud LaTeX 標準構成）
+%%
+%% 使い方:
+%%   \documentclass[dvipdfmx]{jsbook}   % jsarticle でも可
+%%   \input{koushin-base}      % ← 必ず最初に読み込む
+%%   \input{koushin-physics}   % ← 科目別プリアンブル（1つだけ）
+%%   \begin{document}
+%%   ...
+%%
+%% ブランドカラー: mainBlue = RGB(0,51,102)  ← 全科目共通・不変
+%% 科目色       : accentColor ← 科目別ファイルが上書きする
+%% ============================================================
+
+%% ---------- 基本パッケージ ----------
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{xcolor}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{fancybox}
+\usepackage{multicol}
+\usepackage{pdfpages}
+\usepackage{float}
+\usepackage{marginnote}
+\usepackage{ascmac}
+\usepackage{url}
+\usepackage{tikz}
+\usetikzlibrary{patterns}
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{skins,breakable,xparse}
+\usepackage[normalem]{ulem}
+\usepackage{tocloft}
+\usepackage{fancyhdr}
+
+%% ---------- ブランドカラー ----------
+\definecolor{mainBlue}{RGB}{0,51,102}      % 厚胤塾ブランド色（固定）
+\definecolor{accentColor}{RGB}{0,51,102}   % 科目色（科目別ファイルで上書き）
+\providecommand{\SubjectName}{}            % 科目名（科目別ファイルで上書き）
+
+%% ---------- 余白 ----------
+\usepackage[top=25mm,bottom=25mm,left=25mm,right=25mm]{geometry}
+
+%% ---------- 2段組の設定 ----------
+\setlength{\columnsep}{6mm}
+\setlength{\columnseprule}{0.4pt}
+\def\columnseprulecolor{\color{mainBlue}}
+
+%% ---------- 丸数字 \maru{}（platexでUnicode①が使えないため） ----------
+\DeclareRobustCommand{\maru}[1]{%
+  \tikz[baseline=(char.base)]{%
+    \node[shape=circle,draw,inner sep=0.6pt,line width=0.4pt] (char)
+      {\footnotesize #1};}}
+
+%% ---------- 式番号・図表番号（丸数字＆通し番号） ----------
+\makeatletter
+\@ifundefined{c@chapter}{}{%
+  \counterwithout{equation}{chapter}%
+  \counterwithout{figure}{chapter}%
+  \counterwithout{table}{chapter}%
+}
+\makeatother
+\renewcommand{\theequation}{\maru{\arabic{equation}}}
+\renewcommand{\thefigure}{\arabic{figure}}
+\renewcommand{\thetable}{\arabic{table}}
+
+%% ---------- enumerate のラベル形式 ----------
+\setlist[enumerate,1]{label=(\arabic*),  font=\normalfont\upshape}
+\setlist[enumerate,2]{label=(\roman*).,  font=\normalfont\upshape}
+\setlist[enumerate,3]{label=(\alph*),    font=\normalfont\upshape}
+
+%% ---------- 目次デザイン ----------
+\renewcommand{\contentsname}{内容一覧}
+\setcounter{tocdepth}{2}
+\renewcommand{\cftpartfont}{\LARGE\bfseries\color{mainBlue}}
+\renewcommand{\cftpartpagefont}{\LARGE\bfseries\color{mainBlue}}
+\renewcommand{\cftsecfont}{\Large\bfseries\color{accentColor}}
+\renewcommand{\cftsecpagefont}{\Large\bfseries\color{accentColor}}
+\setlength{\cftbeforesecskip}{6pt}
+
+%% ---------- ヘッダー・フッター ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\textcolor{accentColor}{\textsf{\leftmark}}}
+\fancyhead[RO]{\textcolor{accentColor}{\textsf{\rightmark}}}
+\fancyfoot[C]{\textcolor{mainBlue}{\thepage}}
+\fancyfoot[LE,RO]{\textcolor{accentColor}{\scriptsize 厚胤塾\ \SubjectName}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\renewcommand{\headrule}{%
+  \hbox to \headwidth{\color{accentColor}\leaders\hrule height 0.5pt\hfill}}
+\renewcommand{\footrule}{%
+  \hbox to \headwidth{\color{accentColor}\leaders\hrule height 0.5pt\hfill}}
+
+%% ============================================================
+%%  装飾枠（tcolorbox）--- 枠色は accentColor に連動
+%% ============================================================
+
+%% 授業例・例示用（白背景・影つき・タイトルあり）
+\newtcolorbox{jyurei}[1][]{
+  enhanced, colframe=accentColor, colback=white,
+  coltitle=white, fonttitle=\bfseries, drop fuzzy shadow,
+  title=#1, boxrule=1pt, arc=4pt, breakable
+}
+
+%% グレー枠・タイトル浮き出し
+\newtcolorbox{mybox}[1][]{
+  enhanced, colframe=white!35!black, colback=white,
+  title=#1, fonttitle=\bfseries, breakable=true,
+  coltitle=white!20!black,
+  attach boxed title to top left={xshift=5mm, yshift=-3mm},
+  boxed title style={colframe=white!35!black, colback=white},
+  top=4mm
+}
+
+%% 科目色枠・クリーム背景・タイトルボックス浮き出し
+\newtcolorbox{b_s_b_t}[1][]{
+  colback=yellow!10, colframe=accentColor, coltitle=white,
+  fonttitle=\bfseries, title=#1, boxrule=1pt, arc=4pt,
+  breakable, enhanced,
+  attach boxed title to top left={xshift=1em,
+    yshift*=-\tcboxedtitleheight/2},
+  colbacktitle=accentColor,
+  boxed title style={frame code={%
+    \path[fill=accentColor] (frame.south west)--(frame.north west)--
+    (frame.north east)--(frame.south east)--cycle;},
+    interior hidden},
+}
+
+%% 科目色実線枠・クリーム背景・シンプルタイトル
+\newtcolorbox{bluebox}[1][]{
+  colframe=accentColor, colback=yellow!10, coltitle=white,
+  fonttitle=\bfseries, title=#1, boxrule=1pt, arc=4pt, breakable
+}
+
+%% 破線枠・クリーム背景・タイトルあり
+\newenvironment{mybox_d_b}[1]{%
+  \begin{tcolorbox}[
+    coltitle=black, title=#1, colback=yellow!10,
+    frame hidden, interior hidden, enhanced, arc=1em,
+    borderline={1pt}{0pt}{dashed},
+    attach boxed title to top left={xshift=1em,
+      yshift*=-\tcboxedtitleheight/2},
+    colbacktitle=white, boxed title style={frame hidden},
+    breakable,
+  ]
+}{\end{tcolorbox}}
+
+%% 破線枠・タイトルなし・背景なし
+\newenvironment{mybox_dash}{%
+  \begin{tcolorbox}[
+    frame hidden, interior hidden, enhanced, arc=1em,
+    borderline={1pt}{0pt}{dashed}
+  ]
+}{\end{tcolorbox}}
+
+%% 破線枠・タイトルあり・背景なし（解法など）
+\newenvironment{kaiho}[1]{%
+  \begin{tcolorbox}[
+    coltitle=black, title=#1, frame hidden, interior hidden,
+    enhanced, arc=1em, borderline={1pt}{0pt}{dashed},
+    attach boxed title to top left={xshift=1em,
+      yshift*=-\tcboxedtitleheight/2},
+    colbacktitle=white, boxed title style={frame hidden},
+  ]
+}{\end{tcolorbox}}
+
+%% 黒実線・タイトル切り欠き枠（原理・法則）
+\DeclareTColorBox{genri}{o m O{.5} O{}}{%
+  empty, left=4mm, right=4mm, top=-1mm,
+  attach boxed title to top left={xshift=1.2zw},
+  boxed title style={empty, left=-2mm, right=-2mm},
+  colframe=black, coltitle=black, coltext=black, breakable,
+  underlay unbroken={%
+    \draw[black, line width=#3pt]
+      (title.east) -- (title.east-|frame.east) --
+      (frame.south east) -- (frame.south west) --
+      (title.west-|frame.west) -- (title.west);},
+  underlay first={%
+    \draw[black, line width=#3pt]
+      (title.east) -- (title.east-|frame.east) -- (frame.south east);
+    \draw[black, line width=#3pt]
+      (frame.south west) -- (title.west-|frame.west) -- (title.west);},
+  underlay middle={%
+    \draw[black, line width=#3pt] (frame.north east) -- (frame.south east);
+    \draw[black, line width=#3pt] (frame.south west) -- (frame.north west);},
+  underlay last={%
+    \draw[black, line width=#3pt]
+      (frame.north east) -- (frame.south east) --
+      (frame.south west) -- (frame.north west);},
+  fonttitle=\gtfamily,
+  IfValueTF={#1}{title=【#2】〈#1〉}{title=【#2】},
+  #4
+}
+
+%% 警告枠（赤：全科目共通で赤固定）
+\newtcolorbox{keikoku}[1][]{
+  colframe=red!70!black, colback=yellow!10, coltitle=white,
+  fonttitle=\bfseries, title=#1, boxrule=1pt, arc=4pt,
+  breakable, enhanced,
+  attach boxed title to top left={xshift=1em,
+    yshift*=-\tcboxedtitleheight/2},
+  colbacktitle=red!70!black,
+  boxed title style={frame code={%
+    \path[fill=red!70!black] (frame.south west)--(frame.north west)--
+    (frame.north east)--(frame.south east)--cycle;},
+    interior hidden},
+}
+
+%% 要点まとめ枠（科目色・薄い科目色背景）
+\newtcolorbox{pointbox}[1][ポイント]{
+  enhanced, colframe=accentColor, colback=accentColor!4!white,
+  coltitle=white, colbacktitle=accentColor, fonttitle=\bfseries,
+  title=#1, boxrule=1pt, arc=3pt, breakable,
+  attach boxed title to top left={xshift=1em,
+    yshift*=-\tcboxedtitleheight/2}
+}
+
+%% ============================================================
+%%  見出しデザイン
+%% ============================================================
+
+%% --- セクション（番号白抜き＋帯） ---
+\makeatletter
+\renewcommand{\thesection}{\arabic{section}}
+\newcommand\Section[1]{%
+  \Section@topmargin%
+  \refstepcounter{section}%
+  {\setlength{\parindent}{0pt}%
+   \Section@font%
+   \Section@title{\thesection}{#1}%
+   \par\nobreak}%
+  \Section@bottommargin%
+}
+\newcommand{\Section@topmargin}{\vspace{2\Cvs}}
+\newcommand{\Section@bottommargin}{\vspace{1\Cvs}}
+\newcommand{\Section@font}{\headfont\Large}
+\newcommand{\Section@title}[2]{%
+  \textcolor{accentColor!30}{\rlap{\rule[-0.6zh]{\textwidth}{2zh}}}%
+  \textcolor{accentColor}{\rlap{\rule[-0.6zh]{3.5zw}{2zh}}}%
+  \makebox[3.5zw][c]{\textcolor{white}{#1}}%
+  \hspace{0.9zw}#2%
+}
+\makeatother
+
+%% --- 太バー付き見出し ---
+\newcommand{\DecoratedSection}[1]{%
+\vspace{2\Cvs}%
+{\setlength{\parindent}{0pt}%
+\begin{tcolorbox}[
+  enhanced, colframe=accentColor, colback=white,
+  boxrule=1pt, arc=0mm, left=10pt, right=10pt, top=8pt, bottom=8pt,
+  leftrule=12pt, width=\textwidth, fontupper=\headfont\Large
+]{#1}\end{tcolorbox}}%
+\vspace{\Cvs}}
+
+%% --- 二重ライン見出し ---
+\newcommand{\FancySection}[1]{%
+\vspace{2\Cvs}%
+{\setlength{\parindent}{0pt}%
+\begin{tcolorbox}[
+  enhanced, colframe=accentColor, colback=white,
+  boxrule=1pt, arc=3mm, left=10pt, right=10pt, top=8pt, bottom=8pt,
+  leftrule=0pt, width=\textwidth,
+  overlay={%
+    \draw[accentColor, line width=3pt]
+      ([xshift=2pt]frame.north west) -- ([xshift=-2pt]frame.north east);
+    \draw[accentColor!30, line width=1.5pt]
+      ([xshift=2pt, yshift=-3pt]frame.north west) --
+      ([xshift=-2pt, yshift=-3pt]frame.north east);},
+  fontupper=\headfont\Large
+]{#1}\end{tcolorbox}}%
+\vspace{\Cvs}}
+
+%% --- 入試問題バナー ---
+\newcommand{\ChallengeTitle}{%
+\vspace{0.3cm}
+\begin{tcolorbox}[
+  enhanced, colframe=accentColor, colback=white,
+  boxrule=0pt, arc=0mm, left=20pt, right=20pt, top=8pt, bottom=8pt,
+  width=\textwidth,
+  overlay={%
+    \fill[accentColor]
+      ([xshift=-3pt]frame.north west) rectangle (frame.south west);
+    \fill[accentColor!90]
+      (frame.north west) rectangle ([xshift=\textwidth]frame.north east);
+    \fill[left color=accentColor!20, right color=white]
+      ([yshift=-3pt]frame.north west) rectangle
+      ([xshift=8cm, yshift=-4pt]frame.north west);
+    \node[anchor=west, inner sep=0pt, font=\Large\bfseries]
+      at ([xshift=25pt, yshift=-14pt]frame.north west)
+      {\textcolor{accentColor}{入試問題に挑戦}};},
+  height=2cm
+]\end{tcolorbox}
+\vspace{0.3cm}}
+
+%% --- テスト用タイトルバナー（#1: テスト名, #2: 範囲） ---
+\newcommand{\KoushinTestTitle}[2]{%
+\begin{tcolorbox}[
+  enhanced, colframe=mainBlue, colback=white,
+  boxrule=1pt, arc=0mm, left=16pt, right=12pt, top=10pt, bottom=10pt,
+  overlay={%
+    \fill[accentColor]
+      (frame.north west) rectangle ([xshift=6pt]frame.south west);}
+]
+{\headfont\LARGE\textcolor{mainBlue}{#1}}\hfill
+{\headfont\large\textcolor{accentColor}{\SubjectName}}\par
+\vspace{2pt}
+{\large #2}\hfill{\small\textcolor{mainBlue}{厚胤塾}}\par
+\vspace{8pt}
+\hfill 氏名\ \uline{\hspace{12zw}}\hspace{1zw}%
+得点\ \fbox{\rule{0pt}{1.6zh}\hspace{5zw}}
+\end{tcolorbox}
+\vspace{0.5\Cvs}}
+
+%% ============================================================
+%%  定理環境（問題・解答系）
+%% ============================================================
+\newtheorem{problem}{問題}
+\newtheorem{reidai}{例題}
+\newtheorem{ans}{答え}
+\newtheorem{ensyu}{演習}
+\newtheorem{solution}{解答}
+\newtheorem{explanation}{解説}
+\newtheorem{kakunin}{確認問題}
+\newtheorem{kakusolu}{解説}
+
+%% ============================================================
+%%  アンダーライン
+%% ============================================================
+\font\sixly=lasy6
+\newcommand{\waveunderline}[1]{%
+  \bgroup\markoverwith{\lower3.5pt\hbox{\sixly \char58}}\ULon{#1}}
+\newcommand{\dashunderline}[1]{%
+  \bgroup\markoverwith{\hbox to .5em{\hrulefill}}\ULon{#1}}
+\newcommand{\solidunderline}[1]{\uline{#1}}
+
+%% ============================================================
+%%  穴埋め \anaume 系
+%% ============================================================
+\setlength{\fboxsep}{1pt}
+%% 太枠（初出の解答欄）
+\newcommand{\anaume}[1]{\setlength{\fboxrule}{1pt}%
+  \framebox[40pt][c]{\mbox{\textbf{\large{#1}}}}\setlength{\fboxrule}{0.4pt}}
+%% 細枠（2回目以降）
+\newcommand{\sanaume}[1]{\framebox[40pt][c]{\mbox{\large{#1}}}}
+%% 横長太枠（3桁以上）
+\newcommand{\banaume}[1]{\setlength{\fboxrule}{1pt}%
+  \fbox{\mbox{\textbf{\large{\phantom{a}#1\phantom{a}}}}}\setlength{\fboxrule}{0.4pt}}
+%% 横長細枠
+\newcommand{\sbanaume}[1]{\fbox{\mbox{\large{\phantom{a}#1\phantom{a}}}}}
+%% 指数用
+\newcommand{\sisuuanaume}[1]{\setlength{\fboxrule}{1pt}%
+  \framebox[16pt][c]{\mbox{\textbf{#1}}}\setlength{\fboxrule}{0.4pt}}
+\newcommand{\ssisuuanaume}[1]{\framebox[16pt][c]{\mbox{#1}}}
+%% 選択肢用（二重枠）
+\newcommand{\senntakuanaume}[1]{\setlength{\fboxrule}{0.6pt}%
+  \doublebox{\mbox{\textbf{\phantom{ア}#1\phantom{ア}}}}\setlength{\fboxrule}{0.4pt}}
+\newcommand{\ssenntakuanaume}[1]{\doublebox{\mbox{\phantom{ア}#1\phantom{ア}}}}
+
+%% ============================================================
+%%  hyperref（最後に読み込む）
+%% ============================================================
+\usepackage{hyperref}
+\usepackage{pxjahyper}
+\hypersetup{hidelinks}

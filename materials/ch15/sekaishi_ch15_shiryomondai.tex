@@ -1,0 +1,419 @@
+%% ============================================================
+%% 第15章 帝国主義とアジアの民族運動
+%% 地図と表で解く世界史 資料読解問題 10題（図版・表 改訂版）
+%% 教科書: 詳説世界史（世界史探究）山川出版社 258〜277頁
+%% 組版: platex + dvipdfmx / koushin-base + koushin-sekaishi + koushin-zuhan
+%% ============================================================
+\documentclass[dvipdfmx,a4paper,10pt]{jsarticle}
+\input{koushin-base}
+\input{koushin-sekaishi}
+\input{koushin-zuhan}
+\usetikzlibrary{arrows.meta,positioning,calc}
+
+%% 図版用の薄色（白黒印刷でも濃淡で判別できる範囲）
+\colorlet{zoneN}{mainBlue!14}
+\colorlet{zoneW}{accentColor!22}
+\colorlet{zoneE}{mainBlue!30}
+\colorlet{zoneS}{accentColor!42}
+\colorlet{seaBG}{black!4}
+
+%% 国ボックス（資料A用）
+\tikzset{
+  kuni/.style={draw=mainBlue,line width=0.7pt,fill=white,
+    minimum width=42mm,minimum height=8.5mm,inner sep=1.5pt},
+  kunihead/.style={fill=mainBlue,text=white,font=\gtfamily\small,
+    minimum width=42mm,minimum height=6.5mm,inner sep=1.5pt},
+  yajirushi/.style={-{Stealth[length=3mm]},line width=1.1pt,draw=black!70},
+  shinshutsu/.style={-{Stealth[length=3.5mm]},line width=1.6pt,draw=mainBlue},
+}
+
+\begin{document}
+
+%% ============================================================
+%% 表紙見出し
+%% ============================================================
+\KoushinTestTitle{第15章　帝国主義とアジアの民族運動}%
+{地図と表で解く世界史　資料読解問題　10題}
+
+\noindent
+実施日：\uline{\hspace{10zw}}\par
+\vspace{2pt}
+\noindent
+{\small 教科書258〜277頁を範囲とする。資料は学習用に再構成した模式図であり、縮尺や国境線は厳密な地理表現ではない。}
+
+%% ============================================================
+%% 第1問
+%% ============================================================
+\daimon{1}{帝国主義の共通点}
+
+\shiryoband{資料A}{列強の海外進出（模式図）}
+
+\begin{center}
+\begin{tikzpicture}[x=1mm,y=1mm]
+  % --- 上段 ---
+  \node[kunihead] (uk)  at (23,54)  {イギリス};
+  \node[kuni,below=0mm of uk.south,anchor=north] (ukb)
+    {\small インド・エジプト・南アフリカ};
+  \node[kunihead] (de)  at (80,54)  {ドイツ};
+  \node[kuni,below=0mm of de.south,anchor=north] (deb)
+    {\small 後発の植民地獲得・世界政策};
+  \node[kunihead] (ru)  at (137,54) {ロシア};
+  \node[kuni,below=0mm of ru.south,anchor=north] (rub)
+    {\small 中央アジア・満洲方面へ南下};
+  % --- 下段 ---
+  \node[kunihead] (fr)  at (23,28)  {フランス};
+  \node[kuni,below=0mm of fr.south,anchor=north] (frb)
+    {\small 北・西アフリカ・インドシナ};
+  \node[kunihead] (us)  at (80,28)  {アメリカ};
+  \node[kuni,below=0mm of us.south,anchor=north] (usb)
+    {\small 米西戦争・フィリピン・中国市場};
+  \node[kunihead] (jp)  at (137,28) {日本};
+  \node[kuni,below=0mm of jp.south,anchor=north] (jpb)
+    {\small 台湾・朝鮮・南満洲へ進出};
+  % --- 関係矢印 ---
+  \draw[yajirushi,{Stealth[length=3mm]}-{Stealth[length=3mm]}]
+    (44.8,49.7) -- (58.2,49.7)
+    node[midway,above=2pt,font=\footnotesize\gtfamily] {競争};
+  \draw[yajirushi] (101.8,23.7) -- (115.2,23.7)
+    node[midway,above=2pt,font=\footnotesize\gtfamily] {太平洋へ};
+\end{tikzpicture}
+\end{center}
+\centerline{\scriptsize ※位置関係は説明用。実際の正確な地理範囲を示すものではない。}
+
+\vspace{0.5\Cvs}
+\noindent
+資料Aを見て、列強の海外進出に共通する目的を二つ挙げなさい。また、後発国ドイツの進出が列強関係を緊張させた理由を80字以内で説明しなさい。
+
+\clearpage
+
+%% ============================================================
+%% 第2問
+%% ============================================================
+\daimon{2}{アフリカ分割}
+
+\shiryoband{資料B}{アフリカ分割（地域別の主要支配国・模式図）}
+
+\begin{center}
+\begin{tikzpicture}[x=1mm,y=1mm]
+  % ---- アフリカ大陸（模式輪郭） ----
+  \def\africapath{
+    (12,78) .. controls (18,86) and (32,90) .. (44,87)
+    .. controls (54,85) and (60,80) .. (62,74)
+    .. controls (63,70) and (60,66) .. (60,63)
+    .. controls (66,60) and (70,56) .. (69,52)
+    .. controls (68,48) and (62,46) .. (58,42)
+    .. controls (55,34) and (50,26) .. (46,18)
+    .. controls (44,12) and (42,6) .. (37,4)
+    .. controls (32,5) and (30,10) .. (29,16)
+    .. controls (28,24) and (24,30) .. (18,36)
+    .. controls (10,42) and (4,50) .. (3,58)
+    .. controls (2,66) and (6,74) .. (12,78) -- cycle}
+  % 海の下地
+  \fill[seaBG] (-2,0) rectangle (74,92);
+  % 地域塗り分け（大陸輪郭でクリップ）
+  \begin{scope}
+    \clip \africapath;
+    \fill[zoneN] (-2,60) rectangle (74,92);          % 北部
+    \fill[zoneW] (-2,32) rectangle (33,60);          % 西部
+    \fill[zoneE] (33,32) rectangle (74,60);          % 東部
+    \fill[zoneS] (-2,0)  rectangle (74,32);          % 中・南部
+    \draw[white,line width=1.2pt] (-2,60) -- (74,60);
+    \draw[white,line width=1.2pt] (33,60) -- (33,32);
+    \draw[white,line width=1.2pt] (-2,32) -- (74,32);
+  \end{scope}
+  \draw[black!60,line width=0.9pt] \africapath;
+  % 地域ラベル
+  \node[font=\small\gtfamily,align=center] at (34,72)
+    {北部\\[-1pt]{\footnotesize （仏・英）}};
+  \node[font=\small\gtfamily,align=center] at (17,46)
+    {西部\\[-1pt]{\footnotesize （仏中心）}};
+  \node[font=\small\gtfamily,align=center] at (50,46)
+    {東部\\[-1pt]{\footnotesize （英中心）}};
+  \node[font=\small\gtfamily,align=center] at (37,20)
+    {中・南部\\[-1pt]{\footnotesize （英・仏・ベルギー等）}};
+  % ---- 右側：分割を促した要因 ----
+  \node[anchor=north west,draw=mainBlue,line width=0.7pt,fill=white,
+        inner sep=3mm,text width=72mm,align=left] at (86,88) {%
+    {\gtfamily\small 分割を促した要因}\\[3pt]
+    {\small
+    \textbullet\ ベルリン会議（1884〜85年）\\[2pt]
+    \textbullet\ 資源・市場・交通路の確保\\[2pt]
+    \textbullet\ 「実効支配」原則\\[2pt]
+    \textbullet\ 列強間の競争}};
+  \node[anchor=north west,text width=72mm,align=left,font=\small] at (86,48)
+    {例外として独立を維持：\\ \juuyou{エチオピア}、\juuyou{リベリア}};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5\Cvs}
+\noindent
+資料B中の「実効支配」原則とは何か。ベルリン会議との関係に触れて説明しなさい。さらに、分割を免れたアフリカの二国を答えなさい。
+
+%% ============================================================
+%% 第3問
+%% ============================================================
+\daimon{3}{南アフリカ戦争}
+
+\noindent
+金・ダイヤモンド資源、ケープ植民地、ブール人という三語をすべて用い、南アフリカ戦争が起こった背景を100字以内で説明しなさい。
+
+\clearpage
+
+%% ============================================================
+%% 第4問
+%% ============================================================
+\daimon{4}{列強による中国分割}
+
+\shiryoband{資料C}{中国をめぐる列強の進出（模式地図）}
+
+\begin{center}
+\begin{tikzpicture}[x=1mm,y=1mm]
+  % ---- 清の領域 ----
+  \fill[black!6] (18,12) rectangle (98,52);
+  \draw[black!60,line width=0.9pt] (18,12) rectangle (98,52);
+  \node[font=\Huge\gtfamily,text=black!45] at (58,32) {清};
+  % ---- 進出矢印（勢力範囲） ----
+  % ロシア：満洲（北東から）
+  \draw[shinshutsu] (88,62) -- (80,49)
+    node[at start,above,font=\footnotesize\gtfamily] {ロシア：満洲};
+  % ドイツ：山東（北から）
+  \draw[shinshutsu] (55,62) -- (62,42)
+    node[at start,above,font=\footnotesize\gtfamily] {ドイツ：山東};
+  % 日本：福建（東から）
+  \draw[shinshutsu] (106,42) -- (90,28)
+    node[at start,above,font=\footnotesize\gtfamily,align=center]
+      {日本：福建{\scriptsize （台湾の対岸）}};
+  % イギリス：長江流域（南西から）
+  \draw[shinshutsu] (8,4) -- (44,26)
+    node[at start,left,font=\footnotesize\gtfamily,align=right]
+      {イギリス：\\長江流域};
+  % フランス：華南（南から）
+  \draw[shinshutsu] (74,0) -- (66,16)
+    node[at start,below,font=\footnotesize\gtfamily]
+      {フランス：華南（広東・広西・雲南）};
+  % ---- 右側：中国側の反応 ----
+  \node[draw=mainBlue,line width=0.7pt,fill=white,rounded corners=1.5mm,
+        inner sep=3mm,text width=38mm,align=left,anchor=north west]
+        (hannou) at (122,58) {%
+    {\gtfamily\small 中国側の反応}\\[4pt]
+    {\small 変法運動{\scriptsize （1898）}}\\[1pt]
+    \hspace*{4mm}{\color{mainBlue}$\downarrow$}\\[1pt]
+    {\small 義和団運動{\scriptsize （1900）}}\\[1pt]
+    \hspace*{4mm}{\color{mainBlue}$\downarrow$}\\[1pt]
+    {\small 辛亥革命{\scriptsize （1911）}}\\[1pt]
+    \hspace*{4mm}{\color{mainBlue}$\downarrow$}\\[1pt]
+    {\small 五・四運動{\scriptsize （1919）}}};
+\end{tikzpicture}
+\end{center}
+\centerline{\scriptsize ※矢印は各国の勢力範囲のおおよその方向を示す模式図。}
+
+\vspace{0.5\Cvs}
+\noindent
+資料Cの進出方向を参考に、三国干渉後の中国で列強が獲得した権益の例を二つ挙げなさい。また、義和団運動が列強への反発として拡大した理由を説明しなさい。
+
+%% ============================================================
+%% 第5問
+%% ============================================================
+\daimon{5}{日露戦争と東アジア}
+
+\noindent
+次の表を完成させ、日露戦争の結果が東アジアの国際関係に与えた影響を説明しなさい。
+
+\begin{hyoB}{日露戦争の結果}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\hyoBw}{|>{\centering\arraybackslash}p{8mm}|p{44mm}|X|}
+  \hline
+  \hyoheadrow \hyohead{} & \hyohead{項目} & \hyohead{答え} \\ \hline
+  \maru{1} & 講和条約名 & （\hspace{18mm}）条約 \\ \hline
+  \maru{2} & 日本が得た鉄道権益 & （\hspace{18mm}）鉄道 \\ \hline
+  \maru{3} & 韓国に対する日本の立場 & （\hspace{18mm}）権の承認 \\ \hline
+\end{tabularx}
+\end{hyoB}
+
+\clearpage
+
+%% ============================================================
+%% 第6問
+%% ============================================================
+\daimon{6}{インド民族運動}
+
+\shiryoband{資料D}{インド民族運動の展開}
+
+\begin{center}
+\begin{tikzpicture}[x=1mm,y=1mm]
+  % 時間軸
+  \draw[line width=1.4pt,color=mainBlue,-{Stealth[length=3.5mm]}]
+    (0,30) -- (160,30);
+  % 目盛りとイベント
+  \foreach \x/\yr/\pos/\txt in {%
+    8/1885/above/{国民会議\\結成},
+    36/1905/below/{ベンガル\\分割令},
+    64/1906/above/{カルカッタ大会４綱領\\全インド＝ムスリム連盟},
+    92/1915/below/{ガンディー\\帰国},
+    120/1919/above/{ローラット法\\アムリットサル事件},
+    148/1920/below/{非暴力・不服従\\運動の開始}}{
+    \fill[accentColor] (\x,30) circle (1.4mm);
+    \draw[black!50,line width=0.5pt] (\x,30) circle (1.4mm);
+  }
+  \foreach \x/\yr/\txt in {8/1885/{国民会議\\結成},
+    64/1906/{カルカッタ大会４綱領\\全インド＝ムスリム連盟結成},
+    120/1919/{ローラット法\\アムリットサル事件}}{
+    \node[font=\small\gtfamily\bfseries,text=mainBlue] at (\x,41) {\yr};
+    \node[font=\footnotesize,align=center,anchor=south] at (\x,43.5) {\txt};
+    \draw[black!40,line width=0.4pt] (\x,32) -- (\x,39);
+  }
+  \foreach \x/\yr/\txt in {36/1905/{ベンガル\\分割令},
+    92/1915/{ガンディー\\帰国},
+    148/1920/{非暴力・不服従\\運動の開始}}{
+    \node[font=\small\gtfamily\bfseries,text=mainBlue] at (\x,19) {\yr};
+    \node[font=\footnotesize,align=center,anchor=north] at (\x,16.5) {\txt};
+    \draw[black!40,line width=0.4pt] (\x,28) -- (\x,21);
+  }
+\end{tikzpicture}
+\end{center}
+\centerline{\small 植民地支配への協力要求と弾圧が、民族運動を大衆化させた。}
+
+\vspace{0.5\Cvs}
+\noindent
+資料Dから、1905年以降に民族運動が大衆化した契機を二つ選び、因果関係が分かるように説明しなさい。ガンディーの運動の特徴も答えなさい。
+
+%% ============================================================
+%% 第7問
+%% ============================================================
+\daimon{7}{辛亥革命}
+
+\shiryoband{資料C（再掲）}{中国をめぐる列強の進出（模式地図）}
+
+\begin{center}
+\begin{tikzpicture}[x=0.72mm,y=0.72mm]
+  \fill[black!6] (18,12) rectangle (98,52);
+  \draw[black!60,line width=0.9pt] (18,12) rectangle (98,52);
+  \node[font=\LARGE\gtfamily,text=black!45] at (58,32) {清};
+  \draw[shinshutsu] (88,62) -- (80,49)
+    node[at start,above,font=\scriptsize\gtfamily] {ロシア：満洲};
+  \draw[shinshutsu] (55,62) -- (62,42)
+    node[at start,above,font=\scriptsize\gtfamily] {ドイツ：山東};
+  \draw[shinshutsu] (106,44) -- (90,28)
+    node[at start,above,font=\scriptsize\gtfamily] {日本：福建};
+  \draw[shinshutsu] (8,4) -- (44,26)
+    node[at start,left,font=\scriptsize\gtfamily,align=right]
+      {イギリス：\\長江流域};
+  \draw[shinshutsu] (74,0) -- (66,16)
+    node[at start,below,font=\scriptsize\gtfamily]
+      {フランス：華南（広東・広西・雲南）};
+  \node[draw=mainBlue,line width=0.7pt,fill=white,rounded corners=1.5mm,
+        inner sep=2.5mm,text width=46mm,align=left,anchor=north west]
+        at (122,58) {%
+    {\gtfamily\footnotesize 中国側の反応}\\[3pt]
+    {\footnotesize 変法運動{\tiny （1898）}}\\[0.5pt]
+    \hspace*{3mm}{\color{mainBlue}\scriptsize $\downarrow$}\\[0.5pt]
+    {\footnotesize 義和団運動{\tiny （1900）}}\\[0.5pt]
+    \hspace*{3mm}{\color{mainBlue}\scriptsize $\downarrow$}\\[0.5pt]
+    {\footnotesize 辛亥革命{\tiny （1911）}}\\[0.5pt]
+    \hspace*{3mm}{\color{mainBlue}\scriptsize $\downarrow$}\\[0.5pt]
+    {\footnotesize 五・四運動{\tiny （1919）}}};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5\Cvs}
+\noindent
+孫文の三民主義の内容を三つ答えなさい。辛亥革命が清朝を倒したにもかかわらず、革命の目標が十分に達成されなかった理由を袁世凱に触れて説明しなさい。
+
+\clearpage
+
+%% ============================================================
+%% 第8問
+%% ============================================================
+\daimon{8}{西アジアの立憲運動}
+
+\shiryoband{資料E}{アジア諸地域の民族運動（比較表）}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\hyoAw}{|>{\centering\arraybackslash}p{28mm}|>{\centering\arraybackslash}p{52mm}|>{\centering\arraybackslash}X|}
+  \hline
+  \hyoheadrow \hyohead{地域} & \hyohead{主な人物・組織} & \hyohead{主な目標／特徴} \\ \hline
+  イラン & タバタバーイーら立憲派 & 立憲革命、議会開設 \\ \hline
+  オスマン帝国 & 青年トルコ & 憲法復活、専制への反対 \\ \hline
+  インド & 国民会議／ガンディー & 自治・独立、非暴力 \\ \hline
+  ベトナム & ファン＝ボイ＝チャウ & 維新運動、東遊運動 \\ \hline
+  中国 & 孫文／中国同盟会 & 民族・民権・民生、共和政 \\ \hline
+\end{tabularx}
+\end{center}
+
+\vspace{0.3\Cvs}
+\noindent
+イラン立憲革命と青年トルコ革命の共通点を一つ、相違点を一つ、資料Eを用いて説明しなさい。
+
+%% ============================================================
+%% 第9問
+%% ============================================================
+\daimon{9}{東南アジアの民族運動}
+
+\shiryoband{資料E（再掲）}{アジア諸地域の民族運動（比較表）}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\hyoAw}{|>{\centering\arraybackslash}p{28mm}|>{\centering\arraybackslash}p{52mm}|>{\centering\arraybackslash}X|}
+  \hline
+  \hyoheadrow \hyohead{地域} & \hyohead{主な人物・組織} & \hyohead{主な目標／特徴} \\ \hline
+  イラン & タバタバーイーら立憲派 & 立憲革命、議会開設 \\ \hline
+  オスマン帝国 & 青年トルコ & 憲法復活、専制への反対 \\ \hline
+  インド & 国民会議／ガンディー & 自治・独立、非暴力 \\ \hline
+  ベトナム & ファン＝ボイ＝チャウ & 維新運動、東遊運動 \\ \hline
+  中国 & 孫文／中国同盟会 & 民族・民権・民生、共和政 \\ \hline
+\end{tabularx}
+\end{center}
+
+\vspace{0.3\Cvs}
+\noindent
+ファン＝ボイ＝チャウが日本に期待した理由を、日露戦争の結果と東遊運動に触れて説明しなさい。植民地支配国も答えなさい。
+
+%% ============================================================
+%% 第10問
+%% ============================================================
+\daimon{10}{総合資料問題}
+
+\noindent
+帝国主義は、列強にとっては国家間競争を激化させ、アジア・アフリカ側には民族運動を生み出した。第1〜9問の資料から具体例を三つ選び、200字以内でこの連鎖を論述しなさい。
+
+\clearpage
+
+%% ============================================================
+%% 解答・解説
+%% ============================================================
+\begin{center}
+{\gtfamily\LARGE\textcolor{mainBlue}{解答・解説}}
+\end{center}
+
+\kaitouband{第1問}
+目的：原料・市場の獲得、投資先・軍事拠点・交通路の確保など。ドイツは統一と工業化の後に植民地獲得へ参入し、既得権をもつ英仏との競争を激化させた。
+
+\kaitouband{第2問}
+実効支配は、単なる宣言でなく現地を実際に統治している国の領有を認める考え方。ベルリン会議後の分割競争を加速した。独立国はエチオピア、リベリア。
+
+\kaitouband{第3問}
+イギリスがケープ植民地から北進し、金・ダイヤモンド資源をもつブール人国家への支配を強めようとして衝突した。
+
+\kaitouband{第4問}
+例：ドイツの膠州湾租借、ロシアの旅順・大連租借、イギリスの九竜半島・威海衛租借、フランスの広州湾租借など。列強の進出とキリスト教布教への反感、生活不安が排外運動を拡大させた。
+
+\kaitouband{第5問}
+\maru{1}ポーツマス条約　\maru{2}南満洲鉄道　\maru{3}優越（指導・監督に近い表現も文脈により可）。日本の南満洲進出と韓国保護国化が進み、ロシアの南下は後退した。
+
+\kaitouband{第6問}
+ベンガル分割令への反発、スワデーシ・英貨排斥・民族教育、ローラット法とアムリットサル事件への反発など。ガンディーは非暴力・不服従を掲げ、民衆参加を広げた。
+
+\kaitouband{第7問}
+民族・民権・民生。清朝崩壊後、袁世凱が臨時大総統となって権力を集中し、共和政と民主政治が定着しなかった。
+
+\kaitouband{第8問}
+共通点：専制に反対し、憲法・議会を求めた。相違点：イランでは立憲革命が議会開設を目指し、オスマン帝国では青年トルコが停止されていた憲法の復活を求めた。
+
+\kaitouband{第9問}
+日本がロシアに勝ったことを、アジア人が欧州列強に対抗できる証拠とみたため。ファン＝ボイ＝チャウは東遊運動で青年を日本に留学させた。支配国はフランス。
+
+\kaitouband{第10問}
+例：列強のアフリカ分割は資源・市場をめぐる競争を激化させた。中国では勢力圏分割が義和団運動や辛亥革命の背景となった。インドでは分割令や弾圧への反発が国民運動を大衆化させ、ガンディーの非暴力・不服従へつながった。具体例と因果関係を採点する。
+
+\end{document}

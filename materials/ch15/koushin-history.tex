@@ -1,0 +1,45 @@
+%% ============================================================
+%% koushin-history.tex --- 厚胤塾 歴史（日本史・世界史）共通プリアンブル
+%% 使い方: 通常はこのファイルを直接 \input せず、
+%%   \input{koushin-nihonshi}  または  \input{koushin-sekaishi}
+%% を使う（科目名だけ切り替わる）。
+%% 科目色: 金茶 RGB(133,94,33)
+%% ============================================================
+
+\definecolor{accentColor}{RGB}{133,94,33}
+\providecommand{\SubjectName}{}\renewcommand{\SubjectName}{歴史}
+
+%% ---------- ルビ ----------
+%% \ruby{漢字}{かん|じ} のように使う
+\usepackage{pxrubrica}
+
+%% ---------- 歴史用マクロ ----------
+%% 年号強調（例: \nen{1867} → 太字＋科目色）
+\newcommand{\nen}[1]{\textcolor{accentColor}{\textbf{#1年}}}
+
+%% 重要語句（例: \juuyou{大政奉還}）
+\newcommand{\juuyou}[1]{\textcolor{accentColor}{\textgt{#1}}}
+
+%% ---------- 史料ボックス ----------
+\newtcolorbox{shiryo}[1][史料]{
+  enhanced, colframe=accentColor, colback=accentColor!4!white,
+  coltitle=white, colbacktitle=accentColor, fonttitle=\bfseries,
+  title=#1, boxrule=1pt, arc=3pt, breakable,
+  attach boxed title to top left={xshift=1em,
+    yshift*=-\tcboxedtitleheight/2}
+}
+
+%% ---------- 年表ボックス ----------
+%% 中で tabular を使う想定:
+%%   \begin{nenpyo}[幕末年表]
+%%     \begin{tabular}{ll}
+%%       1853年 & ペリー来航 \\ ...
+%%     \end{tabular}
+%%   \end{nenpyo}
+\newtcolorbox{nenpyo}[1][年表]{
+  enhanced, colframe=accentColor, colback=white,
+  coltitle=white, colbacktitle=accentColor, fonttitle=\bfseries,
+  title=#1, boxrule=1pt, arc=3pt, breakable,
+  attach boxed title to top left={xshift=1em,
+    yshift*=-\tcboxedtitleheight/2}
+}
