@@ -20,9 +20,10 @@
 %% 国ボックス（資料A用）
 \tikzset{
   kuni/.style={draw=mainBlue,line width=0.7pt,fill=white,
-    minimum width=42mm,minimum height=8.5mm,inner sep=1.5pt},
+    text width=40mm,align=center,font=\footnotesize,
+    minimum height=8mm,inner sep=1.5pt},
   kunihead/.style={fill=mainBlue,text=white,font=\gtfamily\small,
-    minimum width=42mm,minimum height=6.5mm,inner sep=1.5pt},
+    text width=40mm,align=center,minimum height=6.5mm,inner sep=1.5pt},
   yajirushi/.style={-{Stealth[length=3mm]},line width=1.1pt,draw=black!70},
   shinshutsu/.style={-{Stealth[length=3.5mm]},line width=1.6pt,draw=mainBlue},
 }
@@ -53,23 +54,23 @@
   % --- 上段 ---
   \node[kunihead] (uk)  at (23,54)  {イギリス};
   \node[kuni,below=0mm of uk.south,anchor=north] (ukb)
-    {\small インド・エジプト・南アフリカ};
+    {インド・エジプト・南アフリカ};
   \node[kunihead] (de)  at (80,54)  {ドイツ};
   \node[kuni,below=0mm of de.south,anchor=north] (deb)
-    {\small 後発の植民地獲得・世界政策};
+    {後発の植民地獲得・世界政策};
   \node[kunihead] (ru)  at (137,54) {ロシア};
   \node[kuni,below=0mm of ru.south,anchor=north] (rub)
-    {\small 中央アジア・満洲方面へ南下};
+    {中央アジア・満洲方面へ南下};
   % --- 下段 ---
   \node[kunihead] (fr)  at (23,28)  {フランス};
   \node[kuni,below=0mm of fr.south,anchor=north] (frb)
-    {\small 北・西アフリカ・インドシナ};
+    {北・西アフリカ・インドシナ};
   \node[kunihead] (us)  at (80,28)  {アメリカ};
   \node[kuni,below=0mm of us.south,anchor=north] (usb)
-    {\small 米西戦争・フィリピン・中国市場};
+    {米西戦争・フィリピン・中国市場};
   \node[kunihead] (jp)  at (137,28) {日本};
   \node[kuni,below=0mm of jp.south,anchor=north] (jpb)
-    {\small 台湾・朝鮮・南満洲へ進出};
+    {台湾・朝鮮・南満洲へ進出};
   % --- 関係矢印 ---
   \draw[yajirushi,{Stealth[length=3mm]}-{Stealth[length=3mm]}]
     (44.8,49.7) -- (58.2,49.7)
@@ -109,7 +110,7 @@
     .. controls (10,42) and (4,50) .. (3,58)
     .. controls (2,66) and (6,74) .. (12,78) -- cycle}
   % 海の下地
-  \fill[seaBG] (-2,0) rectangle (74,92);
+  \fill[seaBG] (-2,0) rectangle (80,92);
   % 地域塗り分け（大陸輪郭でクリップ）
   \begin{scope}
     \clip \africapath;
@@ -129,8 +130,10 @@
     {西部\\[-1pt]{\footnotesize （仏中心）}};
   \node[font=\small\gtfamily,align=center] at (50,46)
     {東部\\[-1pt]{\footnotesize （英中心）}};
-  \node[font=\small\gtfamily,align=center] at (37,20)
-    {中・南部\\[-1pt]{\footnotesize （英・仏・ベルギー等）}};
+  \node[font=\small\gtfamily] at (37,22) {中・南部};
+  \node[font=\footnotesize,anchor=west] at (48,13)
+    {（英・仏・ベルギー等）};
+  \draw[black!50,line width=0.4pt] (40,18) -- (47.5,13.5);
   % ---- 右側：分割を促した要因 ----
   \node[anchor=north west,draw=mainBlue,line width=0.7pt,fill=white,
         inner sep=3mm,text width=72mm,align=left] at (86,88) {%
@@ -180,21 +183,21 @@
   \draw[shinshutsu] (55,62) -- (62,42)
     node[at start,above,font=\footnotesize\gtfamily] {ドイツ：山東};
   % 日本：福建（東から）
-  \draw[shinshutsu] (106,42) -- (90,28)
-    node[at start,above,font=\footnotesize\gtfamily,align=center]
-      {日本：福建{\scriptsize （台湾の対岸）}};
+  \node[anchor=west,align=left,font=\footnotesize\gtfamily] at (101,46)
+    {日本：福建\\{\scriptsize （台湾の対岸）}};
+  \draw[shinshutsu] (103,40) -- (90,29);
   % イギリス：長江流域（南西から）
-  \draw[shinshutsu] (8,4) -- (44,26)
-    node[at start,left,font=\footnotesize\gtfamily,align=right]
-      {イギリス：\\長江流域};
+  \draw[shinshutsu] (12,2) -- (44,26)
+    node[at start,below,font=\footnotesize\gtfamily]
+      {イギリス：長江流域};
   % フランス：華南（南から）
   \draw[shinshutsu] (74,0) -- (66,16)
     node[at start,below,font=\footnotesize\gtfamily]
       {フランス：華南（広東・広西・雲南）};
   % ---- 右側：中国側の反応 ----
   \node[draw=mainBlue,line width=0.7pt,fill=white,rounded corners=1.5mm,
-        inner sep=3mm,text width=38mm,align=left,anchor=north west]
-        (hannou) at (122,58) {%
+        inner sep=3mm,text width=34mm,align=left,anchor=north west]
+        (hannou) at (124,58) {%
     {\gtfamily\small 中国側の反応}\\[4pt]
     {\small 変法運動{\scriptsize （1898）}}\\[1pt]
     \hspace*{4mm}{\color{mainBlue}$\downarrow$}\\[1pt]
@@ -293,11 +296,11 @@
     node[at start,above,font=\scriptsize\gtfamily] {ロシア：満洲};
   \draw[shinshutsu] (55,62) -- (62,42)
     node[at start,above,font=\scriptsize\gtfamily] {ドイツ：山東};
-  \draw[shinshutsu] (106,44) -- (90,28)
-    node[at start,above,font=\scriptsize\gtfamily] {日本：福建};
-  \draw[shinshutsu] (8,4) -- (44,26)
-    node[at start,left,font=\scriptsize\gtfamily,align=right]
-      {イギリス：\\長江流域};
+  \node[anchor=west,font=\scriptsize\gtfamily] at (100,47) {日本：福建};
+  \draw[shinshutsu] (103,42) -- (90,29);
+  \draw[shinshutsu] (12,2) -- (44,26)
+    node[at start,below,font=\scriptsize\gtfamily]
+      {イギリス：長江流域};
   \draw[shinshutsu] (74,0) -- (66,16)
     node[at start,below,font=\scriptsize\gtfamily]
       {フランス：華南（広東・広西・雲南）};
