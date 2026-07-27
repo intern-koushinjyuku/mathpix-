@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- WH-C15-L-02 アフリカ分割（地域別の主要支配国・模式図）資料B / 幅160mm -->
+<svg xmlns="http://www.w3.org/2000/svg" width="160mm" height="95mm"
+     viewBox="0 0 160 95" font-family="Noto Sans CJK JP, sans-serif">
+  <defs>
+    <path id="africa" d="M12,14
+      C18,6 32,2 44,5
+      C54,7 60,12 62,18
+      C63,22 60,26 60,29
+      C66,32 70,36 69,40
+      C68,44 62,46 58,50
+      C55,58 50,66 46,74
+      C44,80 42,86 37,88
+      C32,87 30,82 29,76
+      C28,68 24,62 18,56
+      C10,50 4,42 3,34
+      C2,26 6,18 12,14 Z"/>
+    <clipPath id="africaclip"><use href="#africa"/></clipPath>
+  </defs>
+  <!-- 海の下地 -->
+  <rect x="0" y="0" width="80" height="92" fill="#f5f5f5"/>
+  <!-- 地域塗り分け -->
+  <g clip-path="url(#africaclip)">
+    <rect x="0" y="0"  width="80" height="32" fill="#dbe2ea"/>
+    <rect x="0" y="32" width="33" height="28" fill="#e4dcce"/>
+    <rect x="33" y="32" width="47" height="28" fill="#b3c2d1"/>
+    <rect x="0" y="60" width="80" height="32" fill="#ccbba2"/>
+    <line x1="0" y1="32" x2="80" y2="32" stroke="#fff" stroke-width="0.45"/>
+    <line x1="33" y1="32" x2="33" y2="60" stroke="#fff" stroke-width="0.45"/>
+    <line x1="0" y1="60" x2="80" y2="60" stroke="#fff" stroke-width="0.45"/>
+  </g>
+  <use href="#africa" fill="none" stroke="#666" stroke-width="0.32"/>
+  <!-- 地域ラベル -->
+  <text x="34" y="18"   font-size="3.2" text-anchor="middle">北部</text>
+  <text x="34" y="22.8" font-size="2.8" text-anchor="middle">（仏・英）</text>
+  <text x="17" y="44"   font-size="3.2" text-anchor="middle">西部</text>
+  <text x="17" y="48.8" font-size="2.8" text-anchor="middle">（仏中心）</text>
+  <text x="50" y="44"   font-size="3.2" text-anchor="middle">東部</text>
+  <text x="50" y="48.8" font-size="2.8" text-anchor="middle">（英中心）</text>
+  <text x="37" y="70.5" font-size="3.2" text-anchor="middle">中・南部</text>
+  <line x1="40" y1="74" x2="47.5" y2="78.5" stroke="#808080" stroke-width="0.25"/>
+  <text x="48.5" y="79.7" font-size="2.8">（英・仏・ベルギー等）</text>
+  <!-- 右側：分割を促した要因 -->
+  <rect x="84" y="3.5" width="74" height="37" fill="#fff" stroke="#003366" stroke-width="0.35"/>
+  <text x="88" y="10" font-size="3.2" font-weight="700">分割を促した要因</text>
+  <g font-size="2.9">
+    <circle cx="89.3" cy="16.1" r="0.75"/>
+    <text x="92" y="17">ベルリン会議（1884〜85年）</text>
+    <circle cx="89.3" cy="22.6" r="0.75"/>
+    <text x="92" y="23.5">資源・市場・交通路の確保</text>
+    <circle cx="89.3" cy="29.1" r="0.75"/>
+    <text x="92" y="30">「実効支配」原則</text>
+    <circle cx="89.3" cy="35.6" r="0.75"/>
+    <text x="92" y="36.5">列強間の競争</text>
+  </g>
+  <!-- 例外注記 -->
+  <text x="84" y="50" font-size="2.9">例外として独立を維持：</text>
+  <text x="84" y="55.5" font-size="2.9" font-weight="700" fill="#855e21">エチオピア、リベリア</text>
+</svg>

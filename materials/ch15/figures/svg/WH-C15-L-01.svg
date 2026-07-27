@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- WH-C15-L-01 列強の海外進出（模式図）資料A / 幅160mm -->
+<svg xmlns="http://www.w3.org/2000/svg" width="160mm" height="46mm"
+     viewBox="0 0 160 46" font-family="Noto Sans CJK JP, sans-serif">
+  <defs>
+    <marker id="ah" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="6" markerHeight="6"
+            orient="auto-start-reverse">
+      <path d="M0,0.4 L6,3 L0,5.6 L1.6,3 Z" fill="#4d4d4d"/>
+    </marker>
+  </defs>
+  <!-- 上段 -->
+  <g>
+    <rect x="2" y="2" width="42" height="6.5" fill="#003366"/>
+    <rect x="2" y="8.5" width="42" height="8.5" fill="#fff" stroke="#003366" stroke-width="0.35"/>
+    <text x="23" y="6.5" font-size="3.2" fill="#fff" text-anchor="middle">イギリス</text>
+    <text x="23" y="13.8" font-size="2.7" text-anchor="middle">インド・エジプト・南アフリカ</text>
+
+    <rect x="59" y="2" width="42" height="6.5" fill="#003366"/>
+    <rect x="59" y="8.5" width="42" height="8.5" fill="#fff" stroke="#003366" stroke-width="0.35"/>
+    <text x="80" y="6.5" font-size="3.2" fill="#fff" text-anchor="middle">ドイツ</text>
+    <text x="80" y="13.8" font-size="2.7" text-anchor="middle">後発の植民地獲得・世界政策</text>
+
+    <rect x="116" y="2" width="42" height="6.5" fill="#003366"/>
+    <rect x="116" y="8.5" width="42" height="8.5" fill="#fff" stroke="#003366" stroke-width="0.35"/>
+    <text x="137" y="6.5" font-size="3.2" fill="#fff" text-anchor="middle">ロシア</text>
+    <text x="137" y="13.8" font-size="2.7" text-anchor="middle">中央アジア・満洲方面へ南下</text>
+  </g>
+  <!-- 下段 -->
+  <g>
+    <rect x="2" y="28" width="42" height="6.5" fill="#003366"/>
+    <rect x="2" y="34.5" width="42" height="8.5" fill="#fff" stroke="#003366" stroke-width="0.35"/>
+    <text x="23" y="32.5" font-size="3.2" fill="#fff" text-anchor="middle">フランス</text>
+    <text x="23" y="39.8" font-size="2.7" text-anchor="middle">北・西アフリカ・インドシナ</text>
+
+    <rect x="59" y="28" width="42" height="6.5" fill="#003366"/>
+    <rect x="59" y="34.5" width="42" height="8.5" fill="#fff" stroke="#003366" stroke-width="0.35"/>
+    <text x="80" y="32.5" font-size="3.2" fill="#fff" text-anchor="middle">アメリカ</text>
+    <text x="80" y="39.8" font-size="2.65" text-anchor="middle">米西戦争・フィリピン・中国市場</text>
+
+    <rect x="116" y="28" width="42" height="6.5" fill="#003366"/>
+    <rect x="116" y="34.5" width="42" height="8.5" fill="#fff" stroke="#003366" stroke-width="0.35"/>
+    <text x="137" y="32.5" font-size="3.2" fill="#fff" text-anchor="middle">日本</text>
+    <text x="137" y="39.8" font-size="2.7" text-anchor="middle">台湾・朝鮮・南満洲へ進出</text>
+  </g>
+  <!-- 関係矢印 -->
+  <line x1="45.6" y1="9.5" x2="57.4" y2="9.5" stroke="#4d4d4d" stroke-width="0.4"
+        marker-start="url(#ah)" marker-end="url(#ah)"/>
+  <text x="51.5" y="7.6" font-size="2.8" text-anchor="middle">競争</text>
+  <line x1="102.6" y1="35.5" x2="114.4" y2="35.5" stroke="#4d4d4d" stroke-width="0.4"
+        marker-end="url(#ah)"/>
+  <text x="108.5" y="33.6" font-size="2.8" text-anchor="middle">太平洋へ</text>
+</svg>

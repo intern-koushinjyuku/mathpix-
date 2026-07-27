@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- WH-C15-L-04 インド民族運動の展開（年表）資料D / 幅160mm -->
+<svg xmlns="http://www.w3.org/2000/svg" width="160mm" height="40mm"
+     viewBox="0 0 160 40" font-family="Noto Sans CJK JP, sans-serif">
+  <defs>
+    <marker id="th" viewBox="0 0 7 7" refX="6" refY="3.5" markerWidth="6" markerHeight="6"
+            orient="auto">
+      <path d="M0,0.5 L7,3.5 L0,6.5 L1.8,3.5 Z" fill="#003366"/>
+    </marker>
+  </defs>
+  <!-- 時間軸 -->
+  <line x1="1" y1="20" x2="156" y2="20" stroke="#003366" stroke-width="0.5"
+        marker-end="url(#th)"/>
+  <!-- 目盛り線 -->
+  <g stroke="#999" stroke-width="0.15">
+    <line x1="8"   y1="13.5" x2="8"   y2="18"/>
+    <line x1="64"  y1="13.5" x2="64"  y2="18"/>
+    <line x1="120" y1="13.5" x2="120" y2="18"/>
+    <line x1="36"  y1="22"   x2="36"  y2="26.5"/>
+    <line x1="92"  y1="22"   x2="92"  y2="26.5"/>
+    <line x1="148" y1="22"   x2="148" y2="26.5"/>
+  </g>
+  <!-- 節点 -->
+  <g fill="#855e21" stroke="#808080" stroke-width="0.18">
+    <circle cx="8"   cy="20" r="1.4"/>
+    <circle cx="36"  cy="20" r="1.4"/>
+    <circle cx="64"  cy="20" r="1.4"/>
+    <circle cx="92"  cy="20" r="1.4"/>
+    <circle cx="120" cy="20" r="1.4"/>
+    <circle cx="148" cy="20" r="1.4"/>
+  </g>
+  <!-- 上段イベント -->
+  <g text-anchor="middle">
+    <text x="8" y="4.8"  font-size="2.7">国民会議</text>
+    <text x="8" y="8.3"  font-size="2.7">結成</text>
+    <text x="8" y="12.3" font-size="3.2" font-weight="700" fill="#003366">1885</text>
+    <text x="64" y="4.8"  font-size="2.7">カルカッタ大会４綱領</text>
+    <text x="64" y="8.3"  font-size="2.7">全インド＝ムスリム連盟結成</text>
+    <text x="64" y="12.3" font-size="3.2" font-weight="700" fill="#003366">1906</text>
+    <text x="120" y="4.8"  font-size="2.7">ローラット法</text>
+    <text x="120" y="8.3"  font-size="2.7">アムリットサル事件</text>
+    <text x="120" y="12.3" font-size="3.2" font-weight="700" fill="#003366">1919</text>
+  </g>
+  <!-- 下段イベント -->
+  <g text-anchor="middle">
+    <text x="36" y="30.6" font-size="3.2" font-weight="700" fill="#003366">1905</text>
+    <text x="36" y="34.4" font-size="2.7">ベンガル</text>
+    <text x="36" y="37.9" font-size="2.7">分割令</text>
+    <text x="92" y="30.6" font-size="3.2" font-weight="700" fill="#003366">1915</text>
+    <text x="92" y="34.4" font-size="2.7">ガンディー</text>
+    <text x="92" y="37.9" font-size="2.7">帰国</text>
+    <text x="148" y="30.6" font-size="3.2" font-weight="700" fill="#003366">1920</text>
+    <text x="148" y="34.4" font-size="2.7">非暴力・不服従</text>
+    <text x="148" y="37.9" font-size="2.7">運動の開始</text>
+  </g>
+</svg>

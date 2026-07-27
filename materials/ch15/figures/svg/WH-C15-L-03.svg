@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- WH-C15-L-03 中国をめぐる列強の進出（模式地図）資料C / 幅160mm相当 -->
+<svg xmlns="http://www.w3.org/2000/svg" width="162mm" height="78mm"
+     viewBox="0 0 162 78" font-family="Noto Sans CJK JP, sans-serif">
+  <defs>
+    <marker id="bh" viewBox="0 0 7 7" refX="6" refY="3.5" markerWidth="5.5" markerHeight="5.5"
+            orient="auto">
+      <path d="M0,0.5 L7,3.5 L0,6.5 L1.8,3.5 Z" fill="#003366"/>
+    </marker>
+  </defs>
+  <!-- 清の領域 -->
+  <rect x="18" y="16" width="80" height="40" fill="#efefef" stroke="#999" stroke-width="0.32"/>
+  <text x="58" y="39.5" font-size="9" fill="#8c8c8c" text-anchor="middle">清</text>
+  <!-- 進出矢印（勢力範囲） -->
+  <g stroke="#003366" stroke-width="0.56">
+    <line x1="88" y1="6"  x2="80" y2="19" marker-end="url(#bh)"/>
+    <line x1="55" y1="6"  x2="62" y2="26" marker-end="url(#bh)"/>
+    <line x1="103" y1="28" x2="90" y2="39" marker-end="url(#bh)"/>
+    <line x1="12" y1="66" x2="44" y2="42" marker-end="url(#bh)"/>
+    <line x1="74" y1="68" x2="66" y2="52" marker-end="url(#bh)"/>
+  </g>
+  <g font-size="2.8">
+    <text x="88" y="4.4" text-anchor="middle">ロシア：満洲</text>
+    <text x="55" y="4.4" text-anchor="middle">ドイツ：山東</text>
+    <text x="101" y="21.8">日本：福建</text>
+    <text x="101" y="25.4" font-size="2.4">（台湾の対岸）</text>
+    <text x="14" y="70" text-anchor="middle">イギリス：長江流域</text>
+    <text x="74" y="72" text-anchor="middle">フランス：華南（広東・広西・雲南）</text>
+  </g>
+  <!-- 右側：中国側の反応 -->
+  <rect x="122" y="10" width="38" height="48" rx="1.5" fill="#fff"
+        stroke="#003366" stroke-width="0.32"/>
+  <text x="125" y="15.8" font-size="3.0" font-weight="700">中国側の反応</text>
+  <g font-size="2.8">
+    <text x="125" y="21.8">変法運動<tspan font-size="2.2">（1898）</tspan></text>
+    <text x="129" y="26.8" fill="#003366">↓</text>
+    <text x="125" y="31.8">義和団運動<tspan font-size="2.2">（1900）</tspan></text>
+    <text x="129" y="36.8" fill="#003366">↓</text>
+    <text x="125" y="41.8">辛亥革命<tspan font-size="2.2">（1911）</tspan></text>
+    <text x="129" y="46.8" fill="#003366">↓</text>
+    <text x="125" y="51.8">五・四運動<tspan font-size="2.2">（1919）</tspan></text>
+  </g>
+</svg>

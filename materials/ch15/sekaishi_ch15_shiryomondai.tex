@@ -10,24 +10,6 @@
 \input{koushin-zuhan}
 \usetikzlibrary{arrows.meta,positioning,calc}
 
-%% 図版用の薄色（白黒印刷でも濃淡で判別できる範囲）
-\colorlet{zoneN}{mainBlue!14}
-\colorlet{zoneW}{accentColor!22}
-\colorlet{zoneE}{mainBlue!30}
-\colorlet{zoneS}{accentColor!42}
-\colorlet{seaBG}{black!4}
-
-%% 国ボックス（資料A用）
-\tikzset{
-  kuni/.style={draw=mainBlue,line width=0.7pt,fill=white,
-    text width=40mm,align=center,font=\footnotesize,
-    minimum height=8mm,inner sep=1.5pt},
-  kunihead/.style={fill=mainBlue,text=white,font=\gtfamily\small,
-    text width=40mm,align=center,minimum height=6.5mm,inner sep=1.5pt},
-  yajirushi/.style={-{Stealth[length=3mm]},line width=1.1pt,draw=black!70},
-  shinshutsu/.style={-{Stealth[length=3.5mm]},line width=1.6pt,draw=mainBlue},
-}
-
 \begin{document}
 
 %% ============================================================
@@ -50,34 +32,7 @@
 \shiryoband{資料A}{列強の海外進出（模式図）}
 
 \begin{center}
-\begin{tikzpicture}[x=1mm,y=1mm]
-  % --- 上段 ---
-  \node[kunihead] (uk)  at (23,54)  {イギリス};
-  \node[kuni,below=0mm of uk.south,anchor=north] (ukb)
-    {インド・エジプト・南アフリカ};
-  \node[kunihead] (de)  at (80,54)  {ドイツ};
-  \node[kuni,below=0mm of de.south,anchor=north] (deb)
-    {後発の植民地獲得・世界政策};
-  \node[kunihead] (ru)  at (137,54) {ロシア};
-  \node[kuni,below=0mm of ru.south,anchor=north] (rub)
-    {中央アジア・満洲方面へ南下};
-  % --- 下段 ---
-  \node[kunihead] (fr)  at (23,28)  {フランス};
-  \node[kuni,below=0mm of fr.south,anchor=north] (frb)
-    {北・西アフリカ・インドシナ};
-  \node[kunihead] (us)  at (80,28)  {アメリカ};
-  \node[kuni,below=0mm of us.south,anchor=north] (usb)
-    {米西戦争・フィリピン・中国市場};
-  \node[kunihead] (jp)  at (137,28) {日本};
-  \node[kuni,below=0mm of jp.south,anchor=north] (jpb)
-    {台湾・朝鮮・南満洲へ進出};
-  % --- 関係矢印 ---
-  \draw[yajirushi,{Stealth[length=3mm]}-{Stealth[length=3mm]}]
-    (44.8,49.7) -- (58.2,49.7)
-    node[midway,above=2pt,font=\footnotesize\gtfamily] {競争};
-  \draw[yajirushi] (101.8,23.7) -- (115.2,23.7)
-    node[midway,above=2pt,font=\footnotesize\gtfamily] {太平洋へ};
-\end{tikzpicture}
+\includegraphics[width=160mm]{figures/png/WH-C15-L-01.png}
 \end{center}
 \centerline{\scriptsize ※位置関係は説明用。実際の正確な地理範囲を示すものではない。}
 
@@ -95,57 +50,7 @@
 \shiryoband{資料B}{アフリカ分割（地域別の主要支配国・模式図）}
 
 \begin{center}
-\begin{tikzpicture}[x=1mm,y=1mm]
-  % ---- アフリカ大陸（模式輪郭） ----
-  \def\africapath{
-    (12,78) .. controls (18,86) and (32,90) .. (44,87)
-    .. controls (54,85) and (60,80) .. (62,74)
-    .. controls (63,70) and (60,66) .. (60,63)
-    .. controls (66,60) and (70,56) .. (69,52)
-    .. controls (68,48) and (62,46) .. (58,42)
-    .. controls (55,34) and (50,26) .. (46,18)
-    .. controls (44,12) and (42,6) .. (37,4)
-    .. controls (32,5) and (30,10) .. (29,16)
-    .. controls (28,24) and (24,30) .. (18,36)
-    .. controls (10,42) and (4,50) .. (3,58)
-    .. controls (2,66) and (6,74) .. (12,78) -- cycle}
-  % 海の下地
-  \fill[seaBG] (-2,0) rectangle (80,92);
-  % 地域塗り分け（大陸輪郭でクリップ）
-  \begin{scope}
-    \clip \africapath;
-    \fill[zoneN] (-2,60) rectangle (74,92);          % 北部
-    \fill[zoneW] (-2,32) rectangle (33,60);          % 西部
-    \fill[zoneE] (33,32) rectangle (74,60);          % 東部
-    \fill[zoneS] (-2,0)  rectangle (74,32);          % 中・南部
-    \draw[white,line width=1.2pt] (-2,60) -- (74,60);
-    \draw[white,line width=1.2pt] (33,60) -- (33,32);
-    \draw[white,line width=1.2pt] (-2,32) -- (74,32);
-  \end{scope}
-  \draw[black!60,line width=0.9pt] \africapath;
-  % 地域ラベル
-  \node[font=\small\gtfamily,align=center] at (34,72)
-    {北部\\[-1pt]{\footnotesize （仏・英）}};
-  \node[font=\small\gtfamily,align=center] at (17,46)
-    {西部\\[-1pt]{\footnotesize （仏中心）}};
-  \node[font=\small\gtfamily,align=center] at (50,46)
-    {東部\\[-1pt]{\footnotesize （英中心）}};
-  \node[font=\small\gtfamily] at (37,22) {中・南部};
-  \node[font=\footnotesize,anchor=west] at (48,13)
-    {（英・仏・ベルギー等）};
-  \draw[black!50,line width=0.4pt] (40,18) -- (47.5,13.5);
-  % ---- 右側：分割を促した要因 ----
-  \node[anchor=north west,draw=mainBlue,line width=0.7pt,fill=white,
-        inner sep=3mm,text width=72mm,align=left] at (86,88) {%
-    {\gtfamily\small 分割を促した要因}\\[3pt]
-    {\small
-    \textbullet\ ベルリン会議（1884〜85年）\\[2pt]
-    \textbullet\ 資源・市場・交通路の確保\\[2pt]
-    \textbullet\ 「実効支配」原則\\[2pt]
-    \textbullet\ 列強間の競争}};
-  \node[anchor=north west,text width=72mm,align=left,font=\small] at (86,48)
-    {例外として独立を維持：\\ \juuyou{エチオピア}、\juuyou{リベリア}};
-\end{tikzpicture}
+\includegraphics[width=160mm]{figures/png/WH-C15-L-02.png}
 \end{center}
 
 \vspace{0.5\Cvs}
@@ -170,43 +75,7 @@
 \shiryoband{資料C}{中国をめぐる列強の進出（模式地図）}
 
 \begin{center}
-\begin{tikzpicture}[x=1mm,y=1mm]
-  % ---- 清の領域 ----
-  \fill[black!6] (18,12) rectangle (98,52);
-  \draw[black!60,line width=0.9pt] (18,12) rectangle (98,52);
-  \node[font=\Huge\gtfamily,text=black!45] at (58,32) {清};
-  % ---- 進出矢印（勢力範囲） ----
-  % ロシア：満洲（北東から）
-  \draw[shinshutsu] (88,62) -- (80,49)
-    node[at start,above,font=\footnotesize\gtfamily] {ロシア：満洲};
-  % ドイツ：山東（北から）
-  \draw[shinshutsu] (55,62) -- (62,42)
-    node[at start,above,font=\footnotesize\gtfamily] {ドイツ：山東};
-  % 日本：福建（東から）
-  \node[anchor=west,align=left,font=\footnotesize\gtfamily] at (101,46)
-    {日本：福建\\{\scriptsize （台湾の対岸）}};
-  \draw[shinshutsu] (103,40) -- (90,29);
-  % イギリス：長江流域（南西から）
-  \draw[shinshutsu] (12,2) -- (44,26)
-    node[at start,below,font=\footnotesize\gtfamily]
-      {イギリス：長江流域};
-  % フランス：華南（南から）
-  \draw[shinshutsu] (74,0) -- (66,16)
-    node[at start,below,font=\footnotesize\gtfamily]
-      {フランス：華南（広東・広西・雲南）};
-  % ---- 右側：中国側の反応 ----
-  \node[draw=mainBlue,line width=0.7pt,fill=white,rounded corners=1.5mm,
-        inner sep=3mm,text width=34mm,align=left,anchor=north west]
-        (hannou) at (124,58) {%
-    {\gtfamily\small 中国側の反応}\\[4pt]
-    {\small 変法運動{\scriptsize （1898）}}\\[1pt]
-    \hspace*{4mm}{\color{mainBlue}$\downarrow$}\\[1pt]
-    {\small 義和団運動{\scriptsize （1900）}}\\[1pt]
-    \hspace*{4mm}{\color{mainBlue}$\downarrow$}\\[1pt]
-    {\small 辛亥革命{\scriptsize （1911）}}\\[1pt]
-    \hspace*{4mm}{\color{mainBlue}$\downarrow$}\\[1pt]
-    {\small 五・四運動{\scriptsize （1919）}}};
-\end{tikzpicture}
+\includegraphics[width=160mm]{figures/png/WH-C15-L-03.png}
 \end{center}
 \centerline{\scriptsize ※矢印は各国の勢力範囲のおおよその方向を示す模式図。}
 
@@ -243,36 +112,7 @@
 \shiryoband{資料D}{インド民族運動の展開}
 
 \begin{center}
-\begin{tikzpicture}[x=1mm,y=1mm]
-  % 時間軸
-  \draw[line width=1.4pt,color=mainBlue,-{Stealth[length=3.5mm]}]
-    (0,30) -- (160,30);
-  % 目盛りとイベント
-  \foreach \x/\yr/\pos/\txt in {%
-    8/1885/above/{国民会議\\結成},
-    36/1905/below/{ベンガル\\分割令},
-    64/1906/above/{カルカッタ大会４綱領\\全インド＝ムスリム連盟},
-    92/1915/below/{ガンディー\\帰国},
-    120/1919/above/{ローラット法\\アムリットサル事件},
-    148/1920/below/{非暴力・不服従\\運動の開始}}{
-    \fill[accentColor] (\x,30) circle (1.4mm);
-    \draw[black!50,line width=0.5pt] (\x,30) circle (1.4mm);
-  }
-  \foreach \x/\yr/\txt in {8/1885/{国民会議\\結成},
-    64/1906/{カルカッタ大会４綱領\\全インド＝ムスリム連盟結成},
-    120/1919/{ローラット法\\アムリットサル事件}}{
-    \node[font=\small\gtfamily\bfseries,text=mainBlue] at (\x,41) {\yr};
-    \node[font=\footnotesize,align=center,anchor=south] at (\x,43.5) {\txt};
-    \draw[black!40,line width=0.4pt] (\x,32) -- (\x,39);
-  }
-  \foreach \x/\yr/\txt in {36/1905/{ベンガル\\分割令},
-    92/1915/{ガンディー\\帰国},
-    148/1920/{非暴力・不服従\\運動の開始}}{
-    \node[font=\small\gtfamily\bfseries,text=mainBlue] at (\x,19) {\yr};
-    \node[font=\footnotesize,align=center,anchor=north] at (\x,16.5) {\txt};
-    \draw[black!40,line width=0.4pt] (\x,28) -- (\x,21);
-  }
-\end{tikzpicture}
+\includegraphics[width=160mm]{figures/png/WH-C15-L-04.png}
 \end{center}
 \centerline{\small 植民地支配への協力要求と弾圧が、民族運動を大衆化させた。}
 
@@ -288,34 +128,7 @@
 \shiryoband{資料C（再掲）}{中国をめぐる列強の進出（模式地図）}
 
 \begin{center}
-\begin{tikzpicture}[x=0.72mm,y=0.72mm]
-  \fill[black!6] (18,12) rectangle (98,52);
-  \draw[black!60,line width=0.9pt] (18,12) rectangle (98,52);
-  \node[font=\LARGE\gtfamily,text=black!45] at (58,32) {清};
-  \draw[shinshutsu] (88,62) -- (80,49)
-    node[at start,above,font=\scriptsize\gtfamily] {ロシア：満洲};
-  \draw[shinshutsu] (55,62) -- (62,42)
-    node[at start,above,font=\scriptsize\gtfamily] {ドイツ：山東};
-  \node[anchor=west,font=\scriptsize\gtfamily] at (100,47) {日本：福建};
-  \draw[shinshutsu] (103,42) -- (90,29);
-  \draw[shinshutsu] (12,2) -- (44,26)
-    node[at start,below,font=\scriptsize\gtfamily]
-      {イギリス：長江流域};
-  \draw[shinshutsu] (74,0) -- (66,16)
-    node[at start,below,font=\scriptsize\gtfamily]
-      {フランス：華南（広東・広西・雲南）};
-  \node[draw=mainBlue,line width=0.7pt,fill=white,rounded corners=1.5mm,
-        inner sep=2.5mm,text width=46mm,align=left,anchor=north west]
-        at (122,58) {%
-    {\gtfamily\footnotesize 中国側の反応}\\[3pt]
-    {\footnotesize 変法運動{\tiny （1898）}}\\[0.5pt]
-    \hspace*{3mm}{\color{mainBlue}\scriptsize $\downarrow$}\\[0.5pt]
-    {\footnotesize 義和団運動{\tiny （1900）}}\\[0.5pt]
-    \hspace*{3mm}{\color{mainBlue}\scriptsize $\downarrow$}\\[0.5pt]
-    {\footnotesize 辛亥革命{\tiny （1911）}}\\[0.5pt]
-    \hspace*{3mm}{\color{mainBlue}\scriptsize $\downarrow$}\\[0.5pt]
-    {\footnotesize 五・四運動{\tiny （1919）}}};
-\end{tikzpicture}
+\includegraphics[width=110mm]{figures/png/WH-C15-L-03.png}
 \end{center}
 
 \vspace{0.5\Cvs}
